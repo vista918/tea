@@ -1,0 +1,1559 @@
+[ 2016-06-30T17:00:14+08:00 ] ::1 /onethink/index.php?s=/admin/addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000864s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000357s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000252s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001284s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000277s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000277s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000274s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000513s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.001302s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000082s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000125s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000953s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000276s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000251s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000244s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000265s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000268s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000234s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000233s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.019214s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019253s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000353s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000388s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000689s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000766s ]
+
+[ 2016-06-30T17:00:17+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000290s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000502s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000952s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000308s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001063s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000355s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000230s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001035s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000277s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000181s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000209s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000237s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000239s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000255s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.012202s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000468s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000402s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000191s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000177s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000173s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000182s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000185s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000173s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000146s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000295s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277216) [ RunTime:0.000167s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000978s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000230s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000180s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.001179s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000281s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000186s ]
+
+[ 2016-06-30T17:00:52+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000613s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001071s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001153s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000262s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000872s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000303s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000206s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000967s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000259s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000199s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000220s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000270s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000242s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000399s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000237s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000170s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000258s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000244s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000169s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000164s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000157s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000155s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000166s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000154s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000306s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277252) [ RunTime:0.000166s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000871s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000187s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000178s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000855s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000179s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000144s ]
+
+[ 2016-06-30T17:01:28+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000441s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000804s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001042s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000351s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000901s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000335s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000212s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000962s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000339s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000207s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000170s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000257s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000236s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000314s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000452s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000174s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000260s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000198s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000146s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000168s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000189s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000160s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000169s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000155s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000274s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277288) [ RunTime:0.000162s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000927s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000224s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000174s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000865s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000229s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000217s ]
+
+[ 2016-06-30T17:01:31+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000252s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000507s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.002101s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000309s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000890s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000329s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000224s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001014s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000247s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000177s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000168s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000215s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000198s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000230s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000238s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000211s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000239s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000132s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000116s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000101s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000102s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000308s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000226s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000174s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000305s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277291) [ RunTime:0.000167s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000881s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000269s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000281s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000878s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000188s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000213s ]
+
+[ 2016-06-30T17:01:35+08:00 ] ::1 /onethink/index.php?s=/admin/addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000908s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000323s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000213s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000946s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000318s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000276s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000217s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000280s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000258s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000180s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000234s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001059s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000243s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000280s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000258s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000254s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000278s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000231s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000258s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.021725s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021763s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000372s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000408s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000676s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000763s ]
+
+[ 2016-06-30T17:01:37+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000439s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000714s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001924s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000242s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000880s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000350s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000217s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001037s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000270s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000253s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000182s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000251s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000337s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000330s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000216s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000162s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000200s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000213s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000183s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000173s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000156s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000159s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000163s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000170s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000272s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277297) [ RunTime:0.000160s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000884s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000220s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000192s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.001026s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000243s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000190s ]
+
+[ 2016-06-30T17:03:43+08:00 ] ::1 /onethink/index.php?s=/admin/addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000845s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000312s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000208s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000953s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000295s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000234s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000193s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000264s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000243s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000133s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000236s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000948s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000271s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000276s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000263s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000257s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000242s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000245s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000231s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000227s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.019746s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019781s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000353s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000386s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001190s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001311s ]
+
+[ 2016-06-30T17:04:03+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000986s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000322s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000207s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001054s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000327s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000269s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000251s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000253s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000297s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000074s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000113s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000976s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000259s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000206s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000199s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000197s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000228s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000200s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000233s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000198s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015425s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015458s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000107s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000130s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000360s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000394s ]
+
+[ 2016-06-30T17:04:06+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001063s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000318s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000264s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000972s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000297s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000241s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000263s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000204s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000256s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000992s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000291s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 0,10   [ RunTime:0.000371s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000071s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000111s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.008557s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008598s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000091s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000116s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000470s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000578s ]
+
+[ 2016-06-30T17:04:10+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/2.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001402s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000381s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000209s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001003s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000258s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000222s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000231s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000247s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000236s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000929s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000237s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 10,10   [ RunTime:0.000366s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000105s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.007789s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007845s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000178s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000212s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000467s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000524s ]
+
+[ 2016-06-30T17:04:12+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/2.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000918s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000333s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000225s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001100s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000279s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000204s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000276s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000224s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000285s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000955s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000200s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 10,10   [ RunTime:0.000337s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000066s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000104s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.007309s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007345s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000085s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000109s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000402s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000443s ]
+
+[ 2016-06-30T17:04:14+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/1.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000790s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000352s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000208s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001241s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000390s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000280s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000400s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000381s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000417s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.001158s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000240s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 0,10   [ RunTime:0.000290s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000100s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000142s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.011053s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011097s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000124s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000149s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000399s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000438s ]
+
+[ 2016-06-30T17:04:38+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/1.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000905s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000311s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000213s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001028s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000262s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000160s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000200s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000177s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000208s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000841s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000154s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 0,10   [ RunTime:0.000258s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000105s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.007939s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007978s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000097s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000121s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000359s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000414s ]
+
+[ 2016-06-30T17:04:40+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/1.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000929s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000346s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000208s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001034s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000312s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000191s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000273s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000230s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000284s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000886s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000174s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 0,10   [ RunTime:0.000303s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000073s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000111s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.008502s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008539s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000102s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000149s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000818s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000961s ]
+
+[ 2016-06-30T17:04:42+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/2.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001197s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000345s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000213s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001018s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000246s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000177s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000217s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000215s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000269s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000851s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000179s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 10,10   [ RunTime:0.000466s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000074s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000112s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.007930s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007974s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000089s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000112s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000371s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000410s ]
+
+[ 2016-06-30T17:04:44+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000842s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000373s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000226s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000982s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000372s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000311s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000215s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000236s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000321s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000096s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000188s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000918s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000241s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000265s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000199s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000184s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000292s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000296s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000251s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000198s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015400s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015434s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000101s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000125s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000432s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000472s ]
+
+[ 2016-06-30T17:04:56+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/uninstall/id/10.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000264s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000453s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001982s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000279s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001138s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000352s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/uninstall%' ) LIMIT 1   [ RunTime:0.000274s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000988s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=53 ) LIMIT 1   [ RunTime:0.000263s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000174s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000184s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000240s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000686s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000284s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000963s ]
+SQL: SELECT * FROM `wx_addons` WHERE ( `id` = 10 ) LIMIT 1   [ RunTime:0.000285s ]
+SQL: DELETE FROM `wx_attribute` WHERE model_id = (SELECT id FROM wx_model WHERE `name`='auto_reply' ORDER BY id DESC LIMIT 1) [ RunTime:0.000295s ]
+SQL: DELETE FROM `wx_model` WHERE `name`='auto_reply' ORDER BY id DESC LIMIT 1 [ RunTime:0.000156s ]
+SQL: DROP TABLE IF EXISTS `wx_auto_reply` [ RunTime:0.000775s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000821s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000197s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000174s ]
+
+[ 2016-06-30T17:04:58+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001530s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000937s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000524s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001524s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000354s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000356s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000231s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000257s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000310s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000099s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000152s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000292s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000247s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000279s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000243s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000226s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000221s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000220s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015836s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000125s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000148s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000372s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000408s ]
+
+[ 2016-06-30T17:05:00+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000222s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000395s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001925s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000296s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000940s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000315s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000212s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001009s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000269s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000182s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000171s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000251s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000303s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000342s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.014835s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000238s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000216s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000138s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000121s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000273s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000302s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000404s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000259s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000177s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000333s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277500) [ RunTime:0.000171s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000973s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000278s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000204s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.001026s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000238s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000199s ]
+
+[ 2016-06-30T17:05:03+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000232s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000406s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001730s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000267s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000893s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000341s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000260s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001208s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000253s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000189s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000165s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000241s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000212s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000244s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000195s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000162s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000173s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000160s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000157s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000156s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000157s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000181s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000217s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000160s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000279s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277503) [ RunTime:0.000162s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000877s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000259s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000213s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000841s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000191s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000167s ]
+
+[ 2016-06-30T17:05:23+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000238s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000412s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001904s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000310s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001058s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000387s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000203s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000989s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000256s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000192s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000146s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000208s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000203s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000237s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000197s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000161s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000169s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000160s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000159s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000156s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000157s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000204s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000269s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000167s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000275s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277523) [ RunTime:0.000131s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001055s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000239s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000178s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000909s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000189s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000166s ]
+
+[ 2016-06-30T17:05:52+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001006s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000332s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000207s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001067s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000343s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000290s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000211s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000243s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000295s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000083s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000126s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000995s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000281s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000199s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000222s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000255s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000245s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000241s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000323s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014775s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014818s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000138s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000166s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000460s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000516s ]
+
+[ 2016-06-30T17:05:54+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000225s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000391s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001943s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000237s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000844s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000328s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000206s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001021s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000291s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000176s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000165s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000259s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000199s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000273s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000207s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000144s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000136s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000119s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000217s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000150s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000152s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000201s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000203s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000236s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000346s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277554) [ RunTime:0.000167s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000880s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000216s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000191s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000819s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000191s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000207s ]
+
+[ 2016-06-30T17:06:07+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000835s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000297s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000189s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000967s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000288s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000277s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000202s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000279s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000252s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000078s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000119s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000895s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000365s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000326s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000198s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000252s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000216s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000412s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000277s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014451s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014485s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000115s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000139s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000432s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000477s ]
+
+[ 2016-06-30T17:06:09+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000270s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000526s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001728s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000263s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000947s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000305s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000204s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001078s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000245s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000190s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000169s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000259s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000196s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000253s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000235s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000162s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000175s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000117s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000106s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000104s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000214s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000230s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000353s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000239s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000366s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277569) [ RunTime:0.000160s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000937s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000230s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000196s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000870s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000225s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000177s ]
+
+[ 2016-06-30T17:06:11+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000921s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000389s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000214s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001027s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000295s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000285s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000199s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000223s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000276s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000079s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000117s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000960s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000224s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000354s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000346s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000358s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000318s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000241s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000201s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015112s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015145s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000100s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000122s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000346s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000381s ]
+
+[ 2016-06-30T17:06:13+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000875s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000350s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000268s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001242s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000376s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000314s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000400s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000379s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000458s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.001057s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000185s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 0,10   [ RunTime:0.000404s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000120s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.008104s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008152s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000111s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000141s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000783s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001041s ]
+
+[ 2016-06-30T17:06:16+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/2.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000874s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000333s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000220s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001224s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000361s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000246s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000324s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000235s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000250s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000919s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000176s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 10,10   [ RunTime:0.000365s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000070s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000108s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.007515s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007558s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000099s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000123s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000375s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000411s ]
+
+[ 2016-06-30T17:06:18+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/1.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000852s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000321s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000188s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001031s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000340s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000280s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000284s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000246s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000219s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000931s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000153s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 0,10   [ RunTime:0.000394s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000130s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.009105s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009157s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000125s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000149s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000405s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000456s ]
+
+[ 2016-06-30T17:06:50+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/2.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000931s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000370s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000217s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000980s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000235s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000215s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000230s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000206s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000231s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000963s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000175s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 10,10   [ RunTime:0.000370s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000079s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000122s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.008739s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008783s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000103s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000125s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000402s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000440s ]
+
+[ 2016-06-30T17:06:52+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/hooks/p/1.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000876s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000340s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/hooks%' ) LIMIT 1   [ RunTime:0.000311s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001016s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=57 ) LIMIT 1   [ RunTime:0.000253s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000166s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000219s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000244s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000248s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000882s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wx_hooks` LIMIT 1   [ RunTime:0.000202s ]
+SQL: SELECT `id`,`name`,`description`,`type`,`update_time`,`addons` FROM `wx_hooks` ORDER BY id desc LIMIT 0,10   [ RunTime:0.000421s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000066s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000103s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.007833s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007879s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000103s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000130s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000799s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000908s ]
+
+[ 2016-06-30T17:07:00+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000930s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000339s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000229s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001236s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000275s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000265s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000195s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000267s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000270s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000077s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000117s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000978s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000262s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000202s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000185s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000261s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000238s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000227s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000191s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.013934s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013967s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000102s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000125s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000359s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000398s ]
+
+[ 2016-06-30T17:07:03+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000612s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000825s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001891s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000276s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000947s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000335s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000207s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000935s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000243s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000177s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000146s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000204s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000238s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000243s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000210s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000162s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000174s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000182s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000126s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000104s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000101s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000200s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000169s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000254s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000374s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277623) [ RunTime:0.000164s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000895s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000250s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000177s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000848s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000198s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000170s ]
+
+[ 2016-06-30T17:07:18+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000259s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000447s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001907s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000257s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000882s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000341s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000227s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000945s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000343s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000166s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000241s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000281s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000272s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000287s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000217s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000169s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000162s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000137s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000165s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000186s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000184s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000168s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000127s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000146s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000274s ]
+SQL: INSERT INTO `wx_addons` (`name`,`title`,`description`,`status`,`author`,`version`,`has_adminlist`,`create_time`) VALUES ('AutoReply','自动回复','WeiPHP基础功能，能实现配置关键词，用户回复此关键词后自动回复对应的文件，图文，图片信息',1,'凡星','0.1',0,1467277638) [ RunTime:0.000169s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000900s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'AutoReply' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000191s ]
+NOTIC: [2] include(): Filename cannot be empty /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] include(): Failed opening '' for inclusion (include_path='.:/Applications/XAMPP/xamppfiles/lib/php') /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 127 行.
+NOTIC: [2] Invalid argument supplied for foreach() /Applications/XAMPP/xamppfiles/htdocs/onethink/Application/Common/Controller/Addon.class.php 第 128 行.
+SQL: UPDATE `wx_addons` SET `config`='null' WHERE ( name='AutoReply' ) [ RunTime:0.000175s ]
+SQL: SHOW COLUMNS FROM `wx_hooks` [ RunTime:0.000900s ]
+SQL: SELECT `name` FROM `wx_hooks`  [ RunTime:0.000254s ]
+SQL: DELETE FROM `wx_addons` WHERE ( name='AutoReply' ) [ RunTime:0.000231s ]
+
+[ 2016-06-30T17:10:30+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000892s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000421s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000229s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001143s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000303s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000282s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000266s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000270s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000264s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000073s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000111s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001270s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000365s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000256s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000234s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000228s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000267s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000220s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000279s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.017671s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017706s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000309s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000342s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000619s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000662s ]
+
+[ 2016-06-30T17:10:32+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000232s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000406s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001984s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000269s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000859s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000335s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000207s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001028s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000333s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000270s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000255s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000355s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000283s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000422s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000454s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000150s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000367s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000169s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000157s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000155s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000155s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000147s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000138s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000164s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000444s ]
+
+[ 2016-06-30T17:10:37+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/index.html
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000862s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000325s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/index%' ) LIMIT 1   [ RunTime:0.000248s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.001010s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000274s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000263s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000242s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000282s ]
+SQL: SELECT `id`,`name`,`title`,`description`,`status`,`config`,`author`,`version`,`create_time`,`has_adminlist` FROM `wx_addons` WHERE ( `name` IN ('Attachment','AutoReply','DevTeam','Editor','EditorForAdmin','SiteStat','SocialComment','SystemInfo') )  [ RunTime:0.000310s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000073s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000114s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.000932s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Attachment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000249s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SocialComment' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000439s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'Editor' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000208s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SystemInfo' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000233s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'SiteStat' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000259s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'DevTeam' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000234s ]
+SQL: SELECT `config` FROM `wx_addons` WHERE ( `name` = 'EditorForAdmin' ) AND ( `status` = 1 ) LIMIT 1   [ RunTime:0.000200s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014073s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014108s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000109s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000132s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000316s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000350s ]
+
+[ 2016-06-30T17:10:40+08:00 ] ::1 /onethink/index.php?s=/Admin/Addons/install/addon_name/AutoReply.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000232s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000410s ]
+SQL: SHOW COLUMNS FROM `wx_addons` [ RunTime:0.001751s ]
+SQL: SELECT `title`,`name` FROM `wx_addons` WHERE ( status=1 AND has_adminlist=1 )  [ RunTime:0.000202s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000927s ]
+SQL: SELECT * FROM `wx_menu` WHERE ( `pid` = 0 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000298s ]
+SQL: SELECT `id` FROM `wx_menu` WHERE ( url like '%Addons/install%' ) LIMIT 1   [ RunTime:0.000219s ]
+SQL: SHOW COLUMNS FROM `wx_menu` [ RunTime:0.000949s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=52 ) LIMIT 1   [ RunTime:0.000294s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=44 ) LIMIT 1   [ RunTime:0.000165s ]
+SQL: SELECT `id`,`pid`,`title` FROM `wx_menu` WHERE ( id=43 ) LIMIT 1   [ RunTime:0.000156s ]
+SQL: SELECT DISTINCT  `group` FROM `wx_menu` WHERE ( pid = 43 )  [ RunTime:0.000231s ]
+SQL: SELECT `id`,`url` FROM `wx_menu` WHERE ( `pid` = 43 ) AND ( `hide` = 0 )  [ RunTime:0.000195s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `wx_menu` WHERE ( `group` = '扩展' ) AND ( `pid` = 43 ) AND ( `hide` = 0 ) ORDER BY sort asc  [ RunTime:0.000258s ]
+SQL: CREATE TABLE IF NOT EXISTS `wx_auto_reply` (
+
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+
+`keyword`  varchar(255) NULL  COMMENT '关键词',
+
+`msg_type`  char(50) NULL  DEFAULT 'text' COMMENT '消息类型',
+
+`content`  text NULL  COMMENT '文本内容',
+
+`group_id`  int(10) NULL  COMMENT '图文',
+
+`image_id`  int(10) UNSIGNED NULL  COMMENT '上传图片',
+
+`manager_id`  int(10) NULL  COMMENT '管理员ID',
+
+`token`  varchar(50) NULL  COMMENT 'Token',
+
+`image_material`  int(10) NULL  COMMENT '素材图片id',
+
+PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0 [ RunTime:0.000231s ]
+SQL: INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply') [ RunTime:0.000127s ]
+ERR: 1054:Unknown column 'addon' in 'field list'
+ [ SQL语句 ] : INSERT INTO `wx_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('auto_reply','自动回复','0','','1','["keyword","content","group_id","image_id"]','1:基础','','','','','keyword:关键词\r\ncontent:文件内容\r\ngroup_id:图文\r\nimage_id:图片\r\nids:操作:[EDIT]&type=[msg_type]|编辑,[DELETE]|删除','10','keyword:请输入关键词','','1439194522','1439258843','1','MyISAM','AutoReply')
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('keyword','关键词','varchar(255) NULL','string','','多个关键词可以用空格分开，如“高富帅 白富美”','1','','0','1','1','1439194858','1439194849','','3','','regex','','3','function') [ RunTime:0.000202s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('msg_type','消息类型','char(50) NULL','select','text','','0','text:文本|content@show,group_id@hide,image_id@hide\r\nnews:图文|content@hide,group_id@show,image_id@hide\r\nimage:图片|content@hide,group_id@hide,image_id@show','0','1','1','1439204529','1439194979','','3','','regex','','3','function') [ RunTime:0.000176s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','文本内容','text NULL','textarea','','','1','','0','0','1','1439195826','1439195091','','3','','regex','','3','function') [ RunTime:0.000167s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','图文','int(10) NULL','news','','','1','','0','0','1','1439204192','1439195901','','3','','regex','','3','function') [ RunTime:0.000162s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_id','上传图片','int(10) UNSIGNED NULL','picture','','','1','','0','0','1','1439195945','1439195945','','3','','regex','','3','function') [ RunTime:0.000138s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('manager_id','管理员ID','int(10) NULL','num','','','0','','0','0','1','1439203621','1439203575','','3','','regex','get_mid','1','function') [ RunTime:0.000161s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(50) NULL','string','','','0','','0','0','1','1439203612','1439203612','','3','','regex','get_token','1','function') [ RunTime:0.000122s ]
+SQL: INSERT INTO `wx_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('image_material','素材图片id','int(10) NULL','num','','','0','','0','0','1','1447738833','1447738833','','3','','regex','','3','function') [ RunTime:0.000116s ]
+SQL: UPDATE `wx_attribute` SET model_id= (SELECT MAX(id) FROM `wx_model`) WHERE model_id=0 [ RunTime:0.000315s ]
+

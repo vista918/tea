@@ -58,7 +58,7 @@ class OrderModel extends Model
     //    $newrecord['goodsid'] = $arrayval['goodsid']+1;
         $bok = $this->add($data);
         return $bok;
-    }
+    }	
 	
 	/**
      * @param $orderid int field 订单号

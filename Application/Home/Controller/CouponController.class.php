@@ -17,9 +17,10 @@ class CouponController extends HomeController {
 
 	/* 查询所有的优惠券列表 */
 	public function index(){
-		$totalcoupon = $this->query_coupon('DX123SDFAS124534'/*null,null,null,10002*/);
-		dump($totalcoupon);
-		//$this->display ();
+		$totalcoupon = $this->query_coupon();
+		//dump($totalcoupon);
+		$this->assign('totalcoupon',$totalcoupon);
+		$this->display ();
 	}
 	
 //   couponid             int not null comment '优惠券表主键',
@@ -67,7 +68,7 @@ class CouponController extends HomeController {
 	 */
     public function query_coupon($identify = null,$status = null,$orderid = null,$buyerid = null)
     {
-        echo '查询优惠券记录';
+        //echo '查询优惠券记录';
         $coupon = D('Coupon');
 		
 		$map['tea_coupon.available'] = 0;		//有效

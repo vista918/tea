@@ -17,10 +17,13 @@ class TopicController extends HomeController {
 
 	/* 查询所有的评论记录 */
 	public function index(){
-		$map['goodsid'] = 3;
-		$totaltopic = $this->delete_reply($map);
-		dump($totaltopic);
-		//$this->display ();
+		//$map['goodsid'] = 3;
+		//$totaltopic = $this->delete_reply($map);
+		//dump($totaltopic);
+		$totaltopic = $this->query_topic();
+		$this->assign('totaltopic',$totaltopic);
+		//dump($totaltopic);
+		$this->display ();
 	}
 	
 //	 topicid              int(11) not null auto_increment comment '评论id',
@@ -81,7 +84,7 @@ class TopicController extends HomeController {
 	 */
     public function query_topic($goodsid = null,$buyerid = null)
     {
-        echo '查询评论记录';
+        //echo '查询评论记录';
         $topic = D('topic');
 		
 		if(!is_null($goodsid))

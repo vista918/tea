@@ -19,8 +19,9 @@ class BuyerController extends HomeController {
 	public function index(){
         //$goods = D('Goods');
 		$totalbuyer = $this->query_buyer();
-		dump($totalbuyer);
-		//$this->display ();
+		//dump($totalbuyer);
+		$this->assign('totalbuyer',$totalbuyer);
+		$this->display ();
 	}
 
 	/**
@@ -36,7 +37,6 @@ class BuyerController extends HomeController {
             'account' => null,
             'password' => null,
             'phone' => null,
-            'address' => null,
             'gold' => 0,
             'balance' => 0,
             'expenditure' => 0,
@@ -52,7 +52,7 @@ class BuyerController extends HomeController {
 	 */
     public function query_buyer($name = null)
     {
-        echo '查询商品';
+        //echo '查询买家';
         $buyer = D('Buyer');
 		if(!is_null($name))
 			$map['name'] = array('like','%'.$name.'%');
@@ -73,7 +73,6 @@ class BuyerController extends HomeController {
             'account' => null,
             'password' => null,
             'phone' => null,
-            'address' => null,
             'gold' => 0,
             'balance' => 0,
             'expenditure' => 0,

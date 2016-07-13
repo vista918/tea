@@ -1,0 +1,1022 @@
+[ 2016-07-13T09:42:37+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Withdraw/index
+SQL: SHOW COLUMNS FROM `tea_withdraw` [ RunTime:0.046875s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 0 )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 1 )  [ RunTime:0.000000s ]
+SQL: SELECT sum(money) as summoney,count(money) as count,FROM_UNIXTIME(approvaltime,'%Y-%m-%d') as datetime FROM `tea_withdraw` WHERE ( `status` = 1 ) GROUP BY datetime ORDER BY datetime desc  [ RunTime:0.015625s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\f55e5fe3f70847b7d9c4064ed1345549.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.109375s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.109375s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.015625s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.015625s ]
+INFO: [ app_end ] --END-- [ RunTime:0.015625s ]
+
+[ 2016-07-13T09:58:27+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Withdraw/index
+SQL: SHOW COLUMNS FROM `tea_withdraw` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 0 )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 1 )  [ RunTime:0.000000s ]
+SQL: SELECT sum(money) as summoney,count(money) as count,FROM_UNIXTIME(approvaltime,'%Y-%m-%d') as datetime FROM `tea_withdraw` WHERE ( `status` = 1 ) GROUP BY datetime ORDER BY datetime desc  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\f55e5fe3f70847b7d9c4064ed1345549.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:01:08+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Withdraw/index
+SQL: SHOW COLUMNS FROM `tea_withdraw` [ RunTime:0.015625s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 0 )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 1 )  [ RunTime:0.000000s ]
+SQL: SELECT sum(money) as summoney,count(money) as count,FROM_UNIXTIME(approvaltime,'%Y-%m-%d') as datetime FROM `tea_withdraw` WHERE ( `status` = 1 ) GROUP BY datetime ORDER BY datetime desc  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\f55e5fe3f70847b7d9c4064ed1345549.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:01:58+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.046875s ]
+SQL: DELETE FROM `tea_topic` WHERE ( `goodsid` = 3 ) [ RunTime:0.015625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:04:21+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:14:30+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:14:45+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.015625s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.015625s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:15:27+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:16:10+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:17:26+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:18:43+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.015625s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:20:30+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:20:47+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:21:31+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:23:57+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:25:50+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.015625s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:26:49+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:28:51+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:30:35+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.015625s ]
+
+[ 2016-07-13T10:31:02+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:31:09+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:31:35+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.015625s ]
+
+[ 2016-07-13T10:31:58+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:35:50+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:36:05+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:36:21+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:37:20+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.015625s ]
+INFO: [ app_end ] --END-- [ RunTime:0.015625s ]
+
+[ 2016-07-13T10:37:48+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.015625s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:38:00+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.015625s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:38:31+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:39:15+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:40:20+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/withdraw/index
+SQL: SHOW COLUMNS FROM `tea_withdraw` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 0 )  [ RunTime:0.015625s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 1 )  [ RunTime:0.000000s ]
+SQL: SELECT sum(money) as summoney,count(money) as count,FROM_UNIXTIME(approvaltime,'%Y-%m-%d') as datetime FROM `tea_withdraw` WHERE ( `status` = 1 ) GROUP BY datetime ORDER BY datetime desc  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\f55e5fe3f70847b7d9c4064ed1345549.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:40:46+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/withdraw/index
+SQL: SHOW COLUMNS FROM `tea_withdraw` [ RunTime:0.015625s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 0 )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 1 )  [ RunTime:0.000000s ]
+SQL: SELECT sum(money) as summoney,count(money) as count,FROM_UNIXTIME(approvaltime,'%Y-%m-%d') as datetime FROM `tea_withdraw` WHERE ( `status` = 1 ) GROUP BY datetime ORDER BY datetime desc  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\f55e5fe3f70847b7d9c4064ed1345549.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:40:57+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/withdraw/index
+SQL: SHOW COLUMNS FROM `tea_withdraw` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 0 )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 1 )  [ RunTime:0.000000s ]
+SQL: SELECT sum(money) as summoney,count(money) as count,FROM_UNIXTIME(approvaltime,'%Y-%m-%d') as datetime FROM `tea_withdraw` WHERE ( `status` = 1 ) GROUP BY datetime ORDER BY datetime desc  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\f55e5fe3f70847b7d9c4064ed1345549.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:41:22+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/withdraw/index
+SQL: SHOW COLUMNS FROM `tea_withdraw` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 0 )  [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_withdraw` WHERE ( `status` = 1 )  [ RunTime:0.015625s ]
+SQL: SELECT sum(money) as summoney,count(money) as count,FROM_UNIXTIME(approvaltime,'%Y-%m-%d') as datetime FROM `tea_withdraw` WHERE ( `status` = 1 ) GROUP BY datetime ORDER BY datetime desc  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\f55e5fe3f70847b7d9c4064ed1345549.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:42:10+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:42:30+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:42:49+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:43:19+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:43:37+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.015625s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.015625s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:44:19+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015625s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:44:45+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.015625s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015625s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:46:52+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Topic/index
+SQL: SHOW COLUMNS FROM `tea_topic` [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: map E:\Vista\projects\onethink\Application\Home\Controller\TopicController.class.php 第 94 行.
+SQL: SELECT * FROM `tea_topic`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T10:49:51+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.062500s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:16:36+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\9c783b4c53471e3d42cba9867498621a.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:17:48+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\9c783b4c53471e3d42cba9867498621a.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:19:32+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.015625s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\9c783b4c53471e3d42cba9867498621a.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:20:19+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.015625s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.015625s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\9c783b4c53471e3d42cba9867498621a.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:22:00+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.015625s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\9c783b4c53471e3d42cba9867498621a.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:22:26+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.015625s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\9c783b4c53471e3d42cba9867498621a.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:23:34+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\9c783b4c53471e3d42cba9867498621a.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:25:11+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Coupon/index
+SQL: SHOW COLUMNS FROM `tea_coupon` [ RunTime:0.015625s ]
+SQL: SELECT * FROM `tea_coupon` WHERE ( tea_coupon.available = 0 )  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: totalgoods E:\Vista\projects\onethink\Runtime\Cache\Home\9c783b4c53471e3d42cba9867498621a.php 第 114 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031250s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:42:28+08:00 ] 127.0.0.1 /onethink/
+SQL: SHOW COLUMNS FROM `wx_category` [ RunTime:0.046875s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `wx_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_document` [ RunTime:0.031250s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `wx_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `create_time` < 1468381347 ) AND ( deadline = 0 OR deadline > 1468381347 ) ORDER BY `id` DESC  [ RunTime:0.015625s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_channel` [ RunTime:0.062500s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `wx_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `wx_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `wx_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.093750s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015625s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `wx_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `wx_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `wx_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1468381347 ) AND ( deadline = 0 OR deadline > 1468381347 ) ORDER BY `level` DESC,`id` DESC LIMIT 0,10   [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.031250s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:42:33+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Article/lists/category/default_blog.html
+SQL: SHOW COLUMNS FROM `wx_category` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `wx_category` WHERE ( `name` = 'default_blog' ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_document` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `wx_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1468381352 ) AND ( deadline = 0 OR deadline > 1468381352 ) ORDER BY `id` DESC LIMIT 0,10   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_channel` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `wx_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000000s ]
+SQL: SELECT `pid` FROM `wx_category` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `wx_category` WHERE ( `pid` = 1 ) AND ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.062500s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015625s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SELECT COUNT(id) AS tp_count FROM `wx_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1468381352 ) AND ( deadline = 0 OR deadline > 1468381352 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015625s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.015625s ]
+INFO: [ app_end ] --END-- [ RunTime:0.015625s ]
+
+[ 2016-07-13T11:42:34+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Article/lists/category/default_blog.html
+SQL: SHOW COLUMNS FROM `wx_category` [ RunTime:0.015625s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `wx_category` WHERE ( `name` = 'default_blog' ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_document` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `wx_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1468381354 ) AND ( deadline = 0 OR deadline > 1468381354 ) ORDER BY `id` DESC LIMIT 0,10   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_channel` [ RunTime:0.015625s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `wx_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000000s ]
+SQL: SELECT `pid` FROM `wx_category` WHERE ( `id` = 2 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `wx_category` WHERE ( `pid` = 1 ) AND ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.031250s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015625s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SELECT COUNT(id) AS tp_count FROM `wx_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1468381354 ) AND ( deadline = 0 OR deadline > 1468381354 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015625s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:42:40+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/User/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_channel` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `wx_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.046875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:42:40+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/User/verify.html
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-07-13T11:42:46+08:00 ] 127.0.0.1 /onethink/index.php?s=/Home/Index/index.html
+SQL: SHOW COLUMNS FROM `wx_category` [ RunTime:0.015625s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `wx_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_document` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `wx_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `create_time` < 1468381365 ) AND ( deadline = 0 OR deadline > 1468381365 ) ORDER BY `id` DESC  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wx_channel` [ RunTime:0.015625s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `wx_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `wx_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `wx_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.031250s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015625s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `wx_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `wx_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `wx_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1468381365 ) AND ( deadline = 0 OR deadline > 1468381365 ) ORDER BY `level` DESC,`id` DESC LIMIT 0,10   [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.031250s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.015625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+

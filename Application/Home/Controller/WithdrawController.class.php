@@ -16,11 +16,14 @@ use OT\DataDictionary;
 class WithdrawController extends HomeController {
 
 	/* 查询所有的提现列表 */
-	public function index(){
-        //$goods = D('Goods');
-		$totalwithdraw = $this->query_withdraw();
-		dump($totalwithdraw);
-		//$this->display ();
+	public function index(){		
+		$withdrawtobeverify = $this->query_withdraw(null,0);
+		$withdrawverifyed = $this->query_withdraw(null,1);
+		$withdrawbyday = $this->query_withdraw_byday();
+		$this->assign('withdrawtobeverify',$withdrawtobeverify);
+		$this->assign('withdrawverifyed',$withdrawverifyed);
+		$this->assign('withdrawbyday',$withdrawbyday);
+		$this->display ();
 	}
 	
 //   withdrawid           int(10) not null auto_increment comment '用户提现表id',
@@ -41,12 +44,12 @@ class WithdrawController extends HomeController {
         $withdraw = D('Withdraw');
         $data = Array (
 			//'withdrawid'	不用填，让其自动填充
-            'buyerid' => 10001,
-            'money' => 200,
-            'status' => 2,
+            'buyerid' => 10000,
+            'money' => 300,
+            'status' => 1,
             'applytime' => time(),
             'approvaltime' => time(),
-            'sharecount' => 3,
+            'sharecount' => 1,
             'approval_id' => null,
         );
         var_dump( $withdraw->_new_withdraw_($data));
@@ -55,18 +58,35 @@ class WithdrawController extends HomeController {
 	/**
 	 * 查询符合条件的提现纪录
 	 * @param null $buyerid int 买家id
-	 * @param null $status int 提现状态，1提交，2审核通过，3审核不通过
+	 * @param null $status int 提现状态，0-待审核，1-审核通过，2-审核不通过
 	 * @return mixed 返回查获询结果
 	 */
     public function query_withdraw($buyerid = null,$status = null)
     {
-        echo '查询提现纪录';
+        // echo '查询提现纪录';
         $withdraw = D('Withdraw');
 		if(!is_null($buyerid))
 			$map['buyerid'] = $buyerid;
 		if(!is_null($status))
 			$map['status'] = $status;
 		$queryresult = $withdraw->where($map)->select();
+		return $queryresult;
+    }	
+		
+	/**
+	 * 按天查询符合条件的提现纪录，用于审计
+	 * @param null $days int 按天数倒数
+	 * @return mixed 返回查获询结果
+	 */
+    public function query_withdraw_byday($days = null)
+    {
+        // echo '按天查询提现纪录';
+        $withdraw = D('Withdraw');
+		$map['status'] = 1;
+		$queryresult = $withdraw->field("sum(money) as summoney,count(money) as count, FROM_UNIXTIME(approvaltime, '%Y-%m-%d') as datetime")->where($map)->group('datetime')->order('datetime desc')->limit($days)->select();
+		//$sql = "select sum(money) as summoney, FROM_UNIXTIME(approvaltime, '%Y-%m-%d') as datetime from tea_withdraw where status = 1 group by datetime";
+		//$queryresult = $withdraw->query($sql);
+		//dump($withdraw->getDbError());
 		return $queryresult;
     }	
 	

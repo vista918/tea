@@ -17,10 +17,16 @@ class OrderController extends HomeController {
 
 	/* 查询所有的商品列表 */
 	public function index(){
-        //$goods = D('Goods');
+        $order = D('Order');
 		$totalorder = $this->query_order();
-		dump($totalorder);
-		//$this->display ();
+		//dump($totalorder);
+		foreach($totalorder as $key => $value)
+		{
+			$ordermoney[$key] = $order->_get_order_money($value['orderid']);
+		}
+		$this->assign('totalorder',$totalorder);
+		$this->assign('ordermoney',$ordermoney);
+		$this->display ();
 	}
 
 	/**
@@ -57,7 +63,7 @@ class OrderController extends HomeController {
 	 */
     public function query_order($orderid = null,$type = null,$status = null,$timebegin = null, $timeend = null,$buyerid = null)
     {
-        echo '查询商品';
+        //echo '查询订单';
 		$order = D('Order');
 		if(!is_null($orderid))
 			$map['orderid'] = $orderid;

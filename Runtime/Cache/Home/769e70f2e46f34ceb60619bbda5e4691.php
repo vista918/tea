@@ -19,6 +19,7 @@
 <!--[if gte IE 9]><!-->
 <script type="text/javascript" src="/onethink/Public/static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/onethink/Public/static/bootstrap/js/bootstrap.min.js"></script>
+
 <!--<![endif]-->
 <!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
 <?php echo hook('pageHeader');?>
@@ -31,7 +32,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="<?php echo U('index/index');?>">OneThink</a>
+            <a class="brand" href="<?php echo U('index/index');?>">初意古茶商城后台管理</a>
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -130,12 +131,12 @@
 	<!-- 底部 -->
 	
     <!-- 底部
-    ================================================== -->
+    ================================================== 
     <footer class="footer">
       <div class="container">
           <p> 本站由 <strong><a href="http://www.onethink.cn" target="_blank">OneThink</a></strong> 强力驱动</p>
       </div>
-    </footer>
+    </footer>-->
 
 <script type="text/javascript">
 (function(){

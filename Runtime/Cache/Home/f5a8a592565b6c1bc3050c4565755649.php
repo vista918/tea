@@ -1,66 +1,150 @@
-<?php if (!defined('THINK_PATH')) exit();?>﻿<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
-  <head>
-    <title>订单管理</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-		
-<!--    <link href="/onethink/Public/Tea/resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/> -->
-    <link href="/onethink/Public/Tea/resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
-    <link href="/onethink/Public/Tea/data/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="/onethink/Public/Tea/files/订单管理/styles.css" type="text/css" rel="stylesheet"/>
+<head>
+	<meta charset="UTF-8">
+<title><?php echo C('WEB_SITE_TITLE');?></title>
+<link href="/onethink/Public/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/onethink/Public/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/onethink/Public/static/bootstrap/css/docs.css" rel="stylesheet">
+<link href="/onethink/Public/static/bootstrap/css/onethink.css" rel="stylesheet">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="/onethink/Public/static/bootstrap/js/html5shiv.js"></script>
+<![endif]-->
 	
-<!--jQuery dependencies-->
+	<style type="text/css">	
+	.gridcss {
+	  position:absolute;
+	  left:100px;
+	  top:40px;
+	}
+	</style>
+
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/onethink/Public/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<script type="text/javascript" src="/onethink/Public/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/onethink/Public/static/bootstrap/js/bootstrap.min.js"></script>
+
+<!--jQuery dependencies
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
+	<link rel="stylesheet" href="/onethink/Public/static/jquery-ui.css" />
+    <!--<script src="/onethink/Public/static/jquery.min.js"></script>    -->
+    <script src="/onethink/Public/static/jquery-ui.min.js"></script>
 	
     <link href="/onethink/Public/static/grid-2.0.4/pqgrid.min.css" type="text/css" rel="stylesheet"/>
 <!--PQ Grid Office theme-->
     <link rel="stylesheet" href="/onethink/Public/static/grid-2.0.4/themes/office/pqgrid.css" />
 	
- <!--   <script src="/onethink/Public/Tea/resources/scripts/jquery-1.7.1.min.js"></script> 
-    <script src="/onethink/Public/Tea/resources/scripts/jquery-ui-1.8.10.custom.min.js"></script> -->
-    <script src="/onethink/Public/Tea/resources/scripts/axure/axQuery.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/globals.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axutils.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/annotation.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/axQuery.std.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/doc.js"></script>
-    <script src="/onethink/Public/Tea/data/document.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/messagecenter.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/events.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/recording.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/action.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/expr.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/geometry.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/flyout.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/ie.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/model.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/repeater.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/sto.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/utils.temp.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/variables.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/drag.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/move.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/visibility.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/style.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/adaptive.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/tree.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/init.temp.js"></script>
-    <script src="/onethink/Public/Tea/files/订单管理/data.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/legacy.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/viewer.js"></script>
-    <script src="/onethink/Public/Tea/resources/scripts/axure/math.js"></script>
     <script src="/onethink/Public/static/grid-2.0.4/pqgrid.min.js"></script>
-    <script type="text/javascript">
-		$axure.utils.getTransparentGifPath = function() { return '/onethink/Public/Tea/resources/images/transparent.gif'; };
-		$axure.utils.getOtherPath = function() { return '/onethink/Public/Tea/resources/Other.html'; };
-		$axure.utils.getReloadPath = function() { return '/onethink/Public/Tea/resources/reload.html'; };	  
-    </script>
-	<script>
+
+<!--<![endif]-->
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+<?php echo hook('pageHeader');?>
+
+</head>
+<body>
+	<!-- 头部 -->
+	<!-- 导航条
+================================================== -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="<?php echo U('index/index');?>">初意古茶商城后台管理</a>
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <?php $__NAV__ = M('Channel')->field(true)->where("status=1")->order("sort")->select(); if(is_array($__NAV__)): $i = 0; $__LIST__ = $__NAV__;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$nav): $mod = ($i % 2 );++$i; if(($nav["pid"]) == "0"): ?><li>
+                            <a href="<?php echo (get_nav_url($nav["url"])); ?>" target="<?php if(($nav["target"]) == "1"): ?>_blank<?php else: ?>_self<?php endif; ?>"><?php echo ($nav["title"]); ?></a>
+                        </li><?php endif; endforeach; endif; else: echo "" ;endif; ?>
+                </ul>
+            </div>
+            <div class="nav-collapse collapse pull-right">
+                <?php if(is_login()): ?><ul class="nav" style="margin-right:0">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0"><?php echo get_username();?> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php echo U('User/profile');?>">修改密码</a></li>
+                                <li><a href="<?php echo U('User/logout');?>">退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                <?php else: ?>
+                    <ul class="nav" style="margin-right:0">
+                        <li>
+                            <a href="<?php echo U('User/login');?>">登录</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo U('User/register');?>" style="padding-left:0;padding-right:0">注册</a>
+                        </li>
+                    </ul><?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- /头部 -->
 	
+	<!-- 主体 -->
+	
+<div id="main-container" class="container">
+    <div class="row">
+        
+<!-- 左侧 nav
+==================================================
+    <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+            <?php echo W('Category/lists', array(1, true));?>
+        </ul>
+    </div> -->
+
+           	
+	<div id="grid_array" class = "gridcss" ></div>   
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	
+    <!-- 底部
+    ================================================== 
+    <footer class="footer">
+      <div class="container">
+          <p> 本站由 <strong><a href="http://www.onethink.cn" target="_blank">OneThink</a></strong> 强力驱动</p>
+      </div>
+    </footer>-->
+
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "/onethink", //当前网站地址
+		"APP"    : "/onethink/index.php?s=", //当前项目地址
+		"PUBLIC" : "/onethink/Public", //项目公共目录地址
+		"DEEP"   : "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINFO分割符
+		"MODEL"  : ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],
+		"VAR"    : ["<?php echo C('VAR_MODULE');?>", "<?php echo C('VAR_CONTROLLER');?>", "<?php echo C('VAR_ACTION');?>"]
+	}
+})();
+</script>
+
+    <script type="text/javascript">	  
 	// 对Date的扩展，将 Date 转化为指定格式的String
 	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
 	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
@@ -136,349 +220,15 @@
         obj.dataModel = { data: data };
         $("#grid_array").pqGrid(obj);
 
-    });        
-	</script>
+    });     
+    </script>
+ <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<?php echo hook('pageFooter', 'widget');?>
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
 	
-	<style type="text/css">	
-	.gridcss {
-	  position:absolute;
-	  left:238px;
-	  top:120px;
-	}
-	</style>
-  </head>
-  <body>
-    <div id="base" class="">
+</div>
 
-      <!-- Unnamed (组合) -->
-      <div id="u690" class="ax_default">
-
-        <!-- Unnamed (矩形) -->
-        <div id="u691" class="ax_default _形状">
-          <div id="u691_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u692" class="text" style="display: none; visibility: hidden">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';"></span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (图片) -->
-        <div id="u693" class="ax_default _图片">
-          <img id="u693_img" class="img " src="/onethink/Public/Tea/images/商品管理/u356.png"/>
-          <!-- Unnamed () -->
-          <div id="u694" class="text" style="display: none; visibility: hidden">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';"></span></p>
-          </div>
-        </div>
-      </div>
-	  
-	  
-      <!-- Unnamed (组合) -->
-      <div id="u863" class="ax_default">
-
-        <!-- Unnamed (文本框) -->
-        <div id="u864" class="ax_default _文本框">
-          <input id="u864_input" type="text" value="" class="text_sketch"/>
-        </div>
-
-        <!-- Unnamed (矩形) -->
-        <div id="u865" class="ax_default _形状">
-          <div id="u865_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u866" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">客户</span></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Unnamed (组合) -->
-      <div id="u695" class="ax_default">
-
-        <!-- Unnamed (文本框) -->
-        <div id="u696" class="ax_default _文本框">
-          <input id="u696_input" type="text" value="" class="text_sketch"/>
-        </div>
-
-        <!-- Unnamed (矩形) -->
-        <div id="u697" class="ax_default _形状">
-          <div id="u697_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u698" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">订单编号</span></p>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Unnamed (导航) -->
-
-      <!-- Unnamed (组合) -->
-      <div id="u706" class="ax_default">
-
-        <!-- Unnamed (矩形) -->
-        <div id="u707" class="ax_default _形状">
-          <div id="u707_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u708" class="text" style="display: none; visibility: hidden">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';"></span></p>
-          </div>
-        </div>
-
-        <!-- 销售概况 (矩形) -->
-        <div id="u709" class="ax_default _形状" data-label="销售概况">
-          <div id="u709_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u710" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">销售概况</span></p>
-          </div>
-        </div>
-
-        <!-- 订单管理 (矩形) -->
-        <div id="u711" class="ax_default _形状" data-label="订单管理">
-          <div id="u711_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u712" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">订单管理</span></p>
-          </div>
-        </div>
-
-        <!-- 商品管理 (矩形) -->
-        <div id="u713" class="ax_default _形状" data-label="商品管理">
-          <div id="u713_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u714" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">商品管理</span></p>
-          </div>
-        </div>
-
-        <!-- 财务管理 (矩形) -->
-        <div id="u715" class="ax_default _形状" data-label="财务管理">
-          <div id="u715_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u716" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">财务管理</span></p>
-          </div>
-        </div>
-
-        <!-- 客户管理 (矩形) -->
-        <div id="u717" class="ax_default _形状" data-label="客户管理">
-          <div id="u717_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u718" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">客户管理</span></p>
-          </div>
-        </div>
-
-        <!-- 评论管理 (矩形) -->
-        <div id="u719" class="ax_default _形状" data-label="评论管理">
-          <div id="u719_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u720" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">评论管理</span></p>
-          </div>
-        </div>
-
-        <!-- 评论管理 (矩形) -->
-        <div id="u721" class="ax_default _形状" data-label="评论管理">
-          <div id="u721_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u722" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">优惠码管理</span></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Unnamed (矩形) -->
-      <div id="u723" class="ax_default _形状">
-        <div id="u723_div" class=""></div>
-        <!-- Unnamed () -->
-        <div id="u724" class="text" style="display: none; visibility: hidden">
-          <p><span style="font-family:'应用字体 Regular', '应用字体';"></span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (矩形) -->
-      <div id="u725" class="ax_default _文本段落">
-        <div id="u725_div" class=""></div>
-        <!-- Unnamed () -->
-        <div id="u726" class="text" style="visibility: visible;">
-          <p><span style="font-family:'应用字体 Regular', '应用字体';">初意古茶商城后台管理系统</span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (组合) -->
-      <div id="u727" class="ax_default">
-
-        <!-- Unnamed (图片) -->
-        <div id="u728" class="ax_default _图片">
-          <img id="u728_img" class="img " src="/onethink/Public/Tea/images/初意古茶商城后台管理系统/u30.png"/>
-          <!-- Unnamed () -->
-          <div id="u729" class="text" style="display: none; visibility: hidden">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';"></span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (椭圆形) -->
-        <div id="u730" class="ax_default _流程形状">
-          <img id="u730_img" class="img " src="/onethink/Public/Tea/images/初意古茶商城后台管理系统/u32.png"/>
-          <!-- Unnamed () -->
-          <div id="u731" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">3</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (椭圆形) [footnote] -->
-        <div id="u730_ann" class="annotation"></div>
-
-        <!-- 消息 (动态面板) -->
-        <div id="u732" class="ax_default ax_default_hidden" data-label="消息" style="display: none; visibility: hidden">
-          <div id="u732_state0" class="panel_state" data-label="消息列表">
-            <div id="u732_state0_content" class="panel_state_content">
-
-              <!-- Unnamed (矩形) -->
-              <div id="u733" class="ax_default _形状">
-                <div id="u733_div" class=""></div>
-                <!-- Unnamed () -->
-                <div id="u734" class="text" style="visibility: visible;">
-                  <p><span style="font-family:'应用字体 Regular', '应用字体';">您有3条未读消息</span></p>
-                </div>
-              </div>
-
-              <!-- 消息1 (矩形) -->
-              <div id="u735" class="ax_default _形状" data-label="消息1">
-                <div id="u735_div" class=""></div>
-                <!-- Unnamed () -->
-                <div id="u736" class="text" style="visibility: visible;">
-                  <p><span style="font-family:'应用字体 Regular', '应用字体';">新订单*2</span></p>
-                </div>
-              </div>
-
-              <!-- 消息1 (矩形) [footnote] -->
-              <div id="u735_ann" class="annotation"></div>
-
-              <!-- 消息2 (矩形) -->
-              <div id="u737" class="ax_default _形状" data-label="消息2">
-                <div id="u737_div" class=""></div>
-                <!-- Unnamed () -->
-                <div id="u738" class="text" style="visibility: visible;">
-                  <p><span style="font-family:'应用字体 Regular', '应用字体';">取消交易申请*1</span></p>
-                </div>
-              </div>
-
-              <!-- 消息2 (矩形) [footnote] -->
-              <div id="u737_ann" class="annotation"></div>
-
-              <!-- 消息3 (矩形) -->
-              <div id="u739" class="ax_default _形状" data-label="消息3">
-                <div id="u739_div" class=""></div>
-                <!-- Unnamed () -->
-                <div id="u740" class="text" style="visibility: visible;">
-                  <p><span style="font-family:'应用字体 Regular', '应用字体';">提现申请*1</span></p>
-                </div>
-              </div>
-
-              <!-- 消息3 (矩形) [footnote] -->
-              <div id="u739_ann" class="annotation"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Unnamed (组合) -->
-      <div id="u741" class="ax_default">
-
-        <!-- Unnamed (图片) -->
-        <div id="u742" class="ax_default _图片">
-          <img id="u742_img" class="img " src="/onethink/Public/Tea/images/初意古茶商城后台管理系统/u44.png"/>
-          <!-- Unnamed () -->
-          <div id="u743" class="text" style="display: none; visibility: hidden">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';"></span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (矩形) -->
-        <div id="u744" class="ax_default _文本段落">
-          <div id="u744_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u745" class="text" style="visibility: visible;">
-            <p style="font-size:14px;"><span style="font-family:'应用字体 Regular', '应用字体';">admin</span><span style="font-family:'应用字体 Regular', '应用字体';font-size:13px;"> </span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (矩形) -->
-        <div id="u746" class="ax_default _文本段落">
-          <div id="u746_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u747" class="text" style="visibility: visible;">
-            <p><span style="font-family:'应用字体 Regular', '应用字体';">▼</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (动态面板) -->
-        <div id="u748" class="ax_default">
-          <div id="u748_state0" class="panel_state" data-label="点击前1">
-            <div id="u748_state0_content" class="panel_state_content">
-            </div>
-          </div>
-          <div id="u748_state1" class="panel_state" data-label="点击后2">
-            <div id="u748_state1_content" class="panel_state_content">
-
-              <!-- Unnamed (组合) -->
-              <div id="u749" class="ax_default">
-
-                <!-- Unnamed (矩形) -->
-                <div id="u750" class="ax_default _形状">
-                  <div id="u750_div" class=""></div>
-                  <!-- Unnamed () -->
-                  <div id="u751" class="text" style="visibility: visible;">
-                    <p><span style="font-family:'应用字体 Regular', '应用字体';">退出</span></p>
-                  </div>
-                </div>
-
-                <!-- Unnamed (矩形) -->
-                <div id="u752" class="ax_default _形状">
-                  <div id="u752_div" class=""></div>
-                  <!-- Unnamed () -->
-                  <div id="u753" class="text" style="visibility: visible;">
-                    <p><span style="font-family:'应用字体 Regular', '应用字体';">设置</span></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 销售概况 (矩形) -->
-      <div id="u754" class="ax_default _形状" data-label="销售概况">
-        <div id="u754_div" class=""></div>
-        <!-- Unnamed () -->
-        <div id="u755" class="text" style="visibility: visible;">
-          <p><span style="font-family:'应用字体 Regular', '应用字体';">订单管理</span></p>
-        </div>
-      </div>    
-
-      <!-- Unnamed (下拉列表框) -->
-      <div id="u879" class="ax_default _下拉列表框">
-        <select id="u879_input" class="text_sketch">
-          <option value="订单状态">订单状态</option>
-          <option value="待发货">待发货</option>
-          <option value="已发货">已发货</option>
-          <option value="交易完成">交易完成</option>
-          <option value="交易取消">交易取消</option>
-        </select>
-      </div>
-
-      <!-- Unnamed (下拉列表框) -->
-      <div id="u880" class="ax_default _下拉列表框">
-        <select id="u880_input" class="text_sketch">
-          <option value="订单类别">订单类别</option>
-          <option value="线上">线上</option>
-          <option value="线下">线下</option>
-        </select>
-      </div>	  
-  
-		<div id="grid_array" class = "gridcss" style="margin:100px;"></div>   	  
-    </div>	
-  </body>
+	<!-- /底部 -->
+</body>
 </html>

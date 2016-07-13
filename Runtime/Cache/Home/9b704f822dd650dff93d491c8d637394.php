@@ -12,14 +12,6 @@
 <!--[if lt IE 9]>
 <script src="/onethink/Public/static/bootstrap/js/html5shiv.js"></script>
 <![endif]-->
-	
-	<style type="text/css">	
-	.gridcss {
-	  position:absolute;
-	  left:100px;
-	  top:40px;
-	}
-	</style>
 
 <!--[if lt IE 9]>
 <script type="text/javascript" src="/onethink/Public/static/jquery-1.10.2.min.js"></script>
@@ -27,21 +19,6 @@
 <!--[if gte IE 9]><!-->
 <script type="text/javascript" src="/onethink/Public/static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/onethink/Public/static/bootstrap/js/bootstrap.min.js"></script>
-
-<!--jQuery dependencies
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
-	<link rel="stylesheet" href="/onethink/Public/static/jquery-ui.css" />
-    <!--<script src="/onethink/Public/static/jquery.min.js"></script>    -->
-    <script src="/onethink/Public/static/jquery-ui.min.js"></script>
-	
-    <link href="/onethink/Public/static/grid-2.0.4/pqgrid.min.css" type="text/css" rel="stylesheet"/>
-<!--PQ Grid Office theme-->
-    <link rel="stylesheet" href="/onethink/Public/static/grid-2.0.4/themes/office/pqgrid.css" />
-	
-    <script src="/onethink/Public/static/grid-2.0.4/pqgrid.min.js"></script>
-
 <!--<![endif]-->
 <!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
 <?php echo hook('pageHeader');?>
@@ -54,7 +31,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="<?php echo U('index/index');?>">初意古茶商城后台管理</a>
+            <a class="brand" href="<?php echo U('index/index');?>">OneThink</a>
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -95,19 +72,67 @@
 	
 	<!-- 主体 -->
 	
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <h2>用户注册</h2>
+    <p><span><span class="pull-left"><span>已经有账号? <a href="<?php echo U('User/login');?>">点此登录</a> </span> </span></p>
+  </div>
+</header>
+
 <div id="main-container" class="container">
     <div class="row">
+         
         
-<!-- 左侧 nav
-==================================================
-    <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-            <?php echo W('Category/lists', array(1, true));?>
-        </ul>
-    </div> -->
 
-           	
-	<div id="grid_array" class = "gridcss" ></div>   
+<section>
+	<div class="span12">
+        <form class="login-form" action="/onethink/index.php?s=/Home/User/register.html" method="post">
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">用户名</label>
+            <div class="controls">
+              <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">密码</label>
+            <div class="controls">
+              <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">确认密码</label>
+            <div class="controls">
+              <input type="password" id="inputPassword" class="span3" placeholder="请再次输入密码" recheck="password" errormsg="您两次输入的密码不一致" nullmsg="请填确认密码" datatype="*" name="repassword">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">邮箱</label>
+            <div class="controls">
+              <input type="text" id="inputEmail" class="span3" placeholder="请输入电子邮件"  ajaxurl="/member/checkUserEmailUnique.html" errormsg="请填写正确格式的邮箱" nullmsg="请填写邮箱" datatype="e" value="" name="email">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">验证码</label>
+            <div class="controls">
+              <input type="text" id="inputPassword" class="span3" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <img class="verifyimg reloadverify" alt="点击切换" src="<?php echo U('verify');?>" style="cursor:pointer;">
+            </div>
+            <div class="controls Validform_checktip text-warning"></div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">注 册</button>
+            </div>
+          </div>
+        </form>
+	</div>
+</section>
+
 
     </div>
 </div>
@@ -124,12 +149,12 @@
 	<!-- 底部 -->
 	
     <!-- 底部
-    ================================================== 
+    ================================================== -->
     <footer class="footer">
       <div class="container">
           <p> 本站由 <strong><a href="http://www.onethink.cn" target="_blank">OneThink</a></strong> 强力驱动</p>
       </div>
-    </footer>-->
+    </footer>
 
 <script type="text/javascript">
 (function(){
@@ -144,77 +169,43 @@
 })();
 </script>
 
-    <script type="text/javascript">	  
-	// 对Date的扩展，将 Date 转化为指定格式的String
-	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
-	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
-	// 例子： 
-	// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-	// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-	Date.prototype.format = function (fmt) { //author: meizz 
-		var o = {
-			"M+": this.getMonth() + 1, //月份 
-			"d+": this.getDate(), //日 
-			"h+": this.getHours(), //小时 
-			"m+": this.getMinutes(), //分 
-			"s+": this.getSeconds(), //秒 
-			"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-			"S": this.getMilliseconds() //毫秒 
-		};
-		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-		for (var k in o)
-		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-		return fmt;
-	}
-	
-    $(function () {
-		//document.write(<?php echo ($totalgoods[3]['goodsid']); ?>);
-		var datafromcontroller = <?php echo json_encode($totalbuyer)?>;
-		//console.trace(datafromcontroller.length);
-		var countoforder = datafromcontroller.length;// count(<?php echo ($totalgoods); ?>);
-		var data = new Array(countoforder);
-		var typeStr = ['线上','线下'];
-		var statusStr = ['等待付款','等待发货','发货中','已收货待确认收货','确认收货待评价','已确认评价'];
-		for(i = 0 ; i < countoforder; ++i)
-		{
-			var newDate = new Date();
-			data[i] = new Array();			
-			newDate.setTime(datafromcontroller[i].createtime*1000);
-			data[i][0] = datafromcontroller[i].name;
-			data[i][1] = datafromcontroller[i].phone;
-			data[i][2] = datafromcontroller[i].address;
-			data[i][3] = 0;
-			data[i][4] = datafromcontroller[i].gold;
-			data[i][5] = datafromcontroller[i].level;
-		}
-		//data[0].push(1, 'Exxon Mobil', '339,938.0', '36,130.0');
-		//data[1] = new array();
-		//data[1] = [1, 'Exxon Mobil', '339,938.0', '36,130.0'];
-        //var data = [[1, 'Exxon Mobil', '339,938.0', '36,130.0'],
-        //    [2, 'Wal-Mart Stores', '315,654.0', '11,231.0']];
+	<script type="text/javascript">
+    	$(document)
+	    	.ajaxStart(function(){
+	    		$("button:submit").addClass("log-in").attr("disabled", true);
+	    	})
+	    	.ajaxStop(function(){
+	    		$("button:submit").removeClass("log-in").attr("disabled", false);
+	    	});
 
-        var obj = { 
-			width: 1000,
-			height: 600,
-			title: "订单列表",
-			resizable:false,
-			draggable:false 
-		};
-		
-        obj.colModel = 
-		[
-			{ title: "姓名", width: 140, dataType: "string" , align: "center"},
-			{ title: "联系方式", width: 120, dataType: "string" , align: "center"},
-			{ title: "收货地址", width: 100, dataType: "string", align: "center" },
-			{ title: "成交订单数", width: 80, dataType: "integer", align: "center"},
-			{ title: "金币数", width: 80, dataType: "integer", align: "center" },
-			{ title: "账号等级", width: 120, dataType: "string", align: "center"},
-		];
-        obj.dataModel = { data: data };
-        $("#grid_array").pqGrid(obj);
 
-    });       
-    </script>
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+    			if(data.status){
+    				window.location.href = data.url;
+    			} else {
+    				self.find(".Validform_checktip").text(data.info);
+    				//刷新验证码
+    				$(".reloadverify").click();
+    			}
+    		}
+    	});
+
+		$(function(){
+			var verifyimg = $(".verifyimg").attr("src");
+            $(".reloadverify").click(function(){
+                if( verifyimg.indexOf('?')>0){
+                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+                }else{
+                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+                }
+            });
+		});
+	</script>
  <!-- 用于加载js代码 -->
 <!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
 <?php echo hook('pageFooter', 'widget');?>

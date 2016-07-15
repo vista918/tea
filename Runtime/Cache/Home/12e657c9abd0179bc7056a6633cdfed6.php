@@ -36,6 +36,21 @@
 <!--[if gte IE 9]><!-->
 <script type="text/javascript" src="/onethink/Public/static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/onethink/Public/static/bootstrap/js/bootstrap.min.js"></script>
+<!--jQuery dependencies
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="/onethink/Public/static/jquery-ui-1.12.0/jquery-ui.css" />
+    <script src="/onethink/Public/static/jquery-ui-1.12.0/jquery-ui.min.js"></script>	-->
+	<link rel="stylesheet" href="/onethink/Public/static/jquery-ui-1.9.2/themes/base/jquery-ui.css" />
+    <script src="/onethink/Public/static/jquery-ui-1.9.2/ui/minified/jquery-ui.min.js"></script>	
+    <!--<script src="/onethink/Public/static/jquery.min.js"></script>    -->
+	
+    <link href="/onethink/Public/static/grid-2.0.4/pqgrid.min.css" type="text/css" rel="stylesheet"/>
+<!--PQ Grid Office theme-->
+    <link rel="stylesheet" href="/onethink/Public/static/grid-2.0.4/themes/office/pqgrid.css" />
+	
+    <script src="/onethink/Public/static/grid-2.0.4/pqgrid.min.js"></script>
 
 	<script src="/onethink/Public/static/highcharts.js"></script>  
 

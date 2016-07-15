@@ -1,19 +1,6 @@
 ﻿<extend name="Base/common"/>
 
 <block name="stylex">
-<!--jQuery dependencies
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
-	<link rel="stylesheet" href="__STATIC__/jquery-ui.css" />
-    <!--<script src="__STATIC__/jquery.min.js"></script>    -->
-    <script src="__STATIC__/jquery-ui.min.js"></script>
-	
-    <link href="__STATIC__/grid-2.0.4/pqgrid.min.css" type="text/css" rel="stylesheet"/>
-<!--PQ Grid Office theme-->
-    <link rel="stylesheet" href="__STATIC__/grid-2.0.4/themes/office/pqgrid.css" />
-	
-    <script src="__STATIC__/grid-2.0.4/pqgrid.min.js"></script>
 </block>
 	
 <block name="script">
@@ -98,6 +85,30 @@
                 return null;
             }
         }
+		
+		var toolbar0 = {
+				items:[
+				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-highlight'},
+				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}
+				]
+			};
+		
+		var toolbar1 = {
+				items:[
+				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-highlight'},
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}
+				]
+			};
+			
+		var toolbar2 = {
+				items:[
+				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-highlight'}
+				]
+			};
 
         var obj = { 
 			width: 1000,
@@ -105,13 +116,13 @@
 			title: "提现审核列表",
 			resizable:false,
 			draggable:true ,
-			toolbar:{
+			/*toolbar:{
 				items:[
-				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-pencil'},
-				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-pencil'},
-				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-pencil'}
+				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-highlight'},
+				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}
 				]
-			},
+			},*/
 			refresh: function () {
                 $("#grid_array").find("button.delete_btn").button({ icons: { primary: 'ui-icon-scissors'} })
                 .unbind("click")
@@ -151,7 +162,9 @@
 			}
 		];
         obj.dataModel = { data: data0 };
+		obj.toolbar = toolbar0;
         $grid = $("#grid_array").pqGrid(obj);
+		//$( "grid_array" ).pqGrid( { toolbar: toolbar } );
         var grid = $grid.data("paramqueryPqGrid");
 		
 		//tobeverify
@@ -168,6 +181,7 @@
 				}
 			];
 			obj.dataModel = { data: data0 };
+			obj.toolbar = toolbar0;
 			$("#grid_array").pqGrid("destroy");
 			$grid = $("#grid_array").pqGrid(obj);
         }
@@ -185,6 +199,7 @@
 			];
 			
 			obj.dataModel = { data: data1 };
+			obj.toolbar = toolbar1;
 			
 			$("#grid_array").pqGrid("destroy");
 			$grid = $("#grid_array").pqGrid(obj);
@@ -201,6 +216,7 @@
 			];
 			
 			obj.dataModel = { data: data2 };
+			obj.toolbar = toolbar2;
 			
 			$("#grid_array").pqGrid("destroy");
 			$grid = $("#grid_array").pqGrid(obj);

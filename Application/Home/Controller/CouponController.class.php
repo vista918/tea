@@ -122,25 +122,90 @@ class CouponController extends HomeController {
 	/**
 	 * 修改优惠券
 	 */
-    public function modify_withdraw()
+    public function modify_withdraw($data)
     {
-        echo '修改优惠券';
+        //echo '修改优惠券';
         $coupon = D('Coupon');
-        $data = Array (
-            //'couponid' => 10001,
-			'identify' => 'ladjlfaf1324654',
-            'type' => 0,
-            'discount' => 98,
-            'disprice' => 20,
-            'starttime' => time(),
-            'deadline' => time(),
-            'status' => 0,
-            'usetime' => time(),
-            'overprice' => 100,
-            'available' => 0,
-        );
-        var_dump( $coupon->save($data));
+        $coupon->save($data);
     }
+	
+
+	public function grid()
+	{			
+		$list0  = $_POST['list'];
+		if( isset($list0)  )
+		{
+			$list00 = json_decode($list0, true);
+		}else
+			return ;
+		
+		$addList = $list00["addList"];
+		$updateList = $list00["updateList"];
+		$deleteList = $list00["deleteList"];
+		
+		//dump($addList);
+		//dump($updateList);
+		//dump($deleteList);
+		
+		//session_start();
+		
+		//$coupons = json_decode($_SESSION["Coupons"], true);   
+		
+		$coupon = D('Coupon'); 
+		
+		if( isset($addList) && count($addList) > 0 )            
+		{			
+		
+			foreach ($addList as $key => $record )
+			{
+				//dump($record);
+				$record['available'] = 0;		//增加有效字段
+				$coupon->add($record);
+				//dump($coupon->getlastsql());
+				//dump($coupon->getDbError());
+				
+			}    
+			//echo json_encode($addList);
+			//dump($coupon->getDbError());
+		}
+		
+		if( isset($updateList) && count($updateList) > 0 )         
+		{    
+			foreach ($updateList as $record)
+			{
+				$coupon->save($record);
+			}    
+			echo json_encode($updateList);
+		}
+		
+		if( isset($deleteList) && count($deleteList) > 0 )     
+		{   
+			foreach ($deleteList as $record)
+			{
+				$condition['couponid'] = $record['couponid'];
+				$this->delete_coupon($condition);
+			}    
+			echo json_encode($deleteList);
+		}
+		
+		//$_SESSION["Coupons"]= json_encode($coupons);    
+	}
+		
+	public function get_grid_data()
+	{		
+		//session_start();
+		//if (isset($_SESSION["Coupons"])==false)
+		//{
+			//add in session["Coupons"];
+			$rows = $this->query_coupon();
+
+		//	$_SESSION["Coupons"]= json_encode($rows);
+		//}    
+		//$coupons = json_decode($_SESSION["Coupons"], true);
+		$sb = "{\"data\":".json_encode($rows)."}";
+		//$sb = "{\"data\":".json_encode($coupons)."}";
+		echo $sb;
+	}
 
 	/**
 	 * 删除优惠券记录，在本案例中，仅修改标志位

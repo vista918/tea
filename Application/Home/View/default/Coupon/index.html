@@ -1,44 +1,10 @@
 ﻿<extend name="Base/common"/>
 
-<block name="stylex">
-<!--jQuery dependencies
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
-	<link rel="stylesheet" href="__STATIC__/jquery-ui.css" />
-    <!--<script src="__STATIC__/jquery.min.js"></script>    -->
-    <script src="__STATIC__/jquery-ui.min.js"></script>
-	
-    <link href="__STATIC__/grid-2.0.4/pqgrid.min.css" type="text/css" rel="stylesheet"/>
-<!--PQ Grid Office theme-->
-    <link rel="stylesheet" href="__STATIC__/grid-2.0.4/themes/office/pqgrid.css" />
-	
-    <script src="__STATIC__/grid-2.0.4/pqgrid.min.js"></script>
+<block name="srciptx">
 </block>
 	
 <block name="script">
     <script type="text/javascript">	  
-	// 对Date的扩展，将 Date 转化为指定格式的String
-	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
-	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
-	// 例子： 
-	// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-	// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-	Date.prototype.format = function (fmt) { //author: meizz 
-		var o = {
-			"M+": this.getMonth() + 1, //月份 
-			"d+": this.getDate(), //日 
-			"h+": this.getHours(), //小时 
-			"m+": this.getMinutes(), //分 
-			"s+": this.getSeconds(), //秒 
-			"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-			"S": this.getMilliseconds() //毫秒 
-		};
-		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-		for (var k in o)
-		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-		return fmt;
-	}
 		
     $(function () {
 		//document.write({$totalgoods[3]['goodsid']});
@@ -52,21 +18,21 @@
 		{
 			var newDate = new Date();
 			data0[i] = new Array();			
-			data0[i][0] = totalcoupon[i].identify;
-			data0[i][1] = typeStr[totalcoupon[i].type];
-			data0[i][2] = totalcoupon[i].discount;
-			data0[i][3] = totalcoupon[i].disprice;
+			data0[i]["identify"] = totalcoupon[i].identify;
+			data0[i]["type"] = typeStr[totalcoupon[i].type];
+			data0[i]["discount"] = totalcoupon[i].discount;
+			data0[i]["disprice"] = totalcoupon[i].disprice;
 			newDate.setTime(totalcoupon[i].starttime *1000);
-			data0[i][4] = newDate.format('yyyy-MM-dd hh:mm:ss');
+			data0[i]["starttime"] = newDate.format('yyyy-MM-dd hh:mm:ss');
 			newDate.setTime(totalcoupon[i].deadline *1000);
-			data0[i][5] = newDate.format('yyyy-MM-dd hh:mm:ss');
-			data0[i][6] = statusStr[totalcoupon[i].status];
+			data0[i]["deadline"] = newDate.format('yyyy-MM-dd hh:mm:ss');
+			data0[i]["status"] = statusStr[totalcoupon[i].status];
 			newDate.setTime(totalcoupon[i].usetime *1000);
-			data0[i][7] = newDate.format('yyyy-MM-dd hh:mm:ss');
-			data0[i][8] = totalcoupon[i].overprice;
-			data0[i][9] = "";
+			data0[i]["usetime"] = newDate.format('yyyy-MM-dd hh:mm:ss');
+			data0[i]["overprice"] = totalcoupon[i].overprice;
+			data0[i]["user"] = "";
 		}
-				
+						
         function getRowIndx() {
             var arr = $grid.pqGrid("selection", { type: 'row', method: 'getSelection' });
             if (arr && arr.length > 0) {
@@ -78,19 +44,130 @@
             }
         }
 
+		var ajaxObj = {
+            dataType: "json",
+            url: "{:U('grid')}", //for PHP
+            //contentType: "application/json; charset=utf-8",//for ASP.NET
+            type: "POST",
+            async: true,
+            beforeSend: function (jqXHR, settings) {                
+                $grid.pqGrid("showLoading");
+            }
+        };
+
+        //called when accept changes button is clicked.
+        function acceptChanges() {
+            //attempt to save editing cell.
+            //debugger;
+            if (grid.saveEditCell() === false) {
+                return false;
+            }
+
+            var isDirty = grid.isDirty();
+            if (isDirty) {
+                //validate the new added rows.                
+                var addList = grid.getChanges().addList;
+                for (var i = 0; i < addList.length; i++) {
+                    var rowData = addList[i];
+                    var isValid = grid.isValid({ "rowData": rowData }).valid;
+                    if (!isValid) {
+                        return;
+                    }
+                }
+                var changes = grid.getChanges({ format: "byVal" });
+				//console.trace(changes);
+
+                //post changes to server 
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    async: true,
+                    beforeSend: function (jqXHR, settings) {
+                        grid.showLoading();
+                    },
+                    //url: "/pro/products/batch", //for ASP.NET, java                                                
+					url: "{:U('grid')}",
+                    data: { list: JSON.stringify(changes) },
+                    success: function (changes) {
+                        //debugger;
+                        grid.commit({ type: 'add', rows: changes.addList });
+                        grid.commit({ type: 'update', rows: changes.updateList });
+                        grid.commit({ type: 'delete', rows: changes.deleteList });
+
+                    },
+                    complete: function () {
+                        grid.hideLoading();
+                    }
+                });
+            }
+        }
+		
         var obj = { 
-			width: 1000,
+			width: 1200,
 			height: 600,
-			title: "提现审核列表",
+			title: "优惠码列表",
 			resizable:false,
 			draggable:true ,
+            scrollModel: {
+                autoFit: true
+            },
+            selectionModel: {
+                type: ''
+            },
+            track: true, //to turn on the track changes.
+            hoverMode: 'cell',
+            editModel: {
+                saveKey: $.ui.keyCode.ENTER
+            },
+            pageModel: { type: "local", rPP: 10, rPPOptions: [10, 20, 50, 100] },
 			toolbar:{
 				items:[
-				{type : "button",label: '1', listeners: [{ click: tobeverify }], icon: 'ui-icon-pencil'},
-				{type : "button",label: '2', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-pencil'},
-				{type : "button",label: '3', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-pencil'}
+				{type : "button",label: '新优惠码', /*style: 'margin:2px 0px;',*/ listeners: [
+                        { "click": function (evt, ui) {
+                            //append empty row at the end.                            
+                            var rowData = { identify: generateMixed(20) , type : 0, disprice : 20, status : 0,
+								discount : 90, starttime: getLocalTime(0) , deadline: getLocalTime(30), overprice: 100, usetime: null , user: "" }; //empty row
+                            var rowIndx = $grid.pqGrid("addRow", { rowData: rowData });
+                            $grid.pqGrid("goToPage", { rowIndx: rowIndx });
+                            $grid.pqGrid("editCell", { rowIndx: rowIndx, dataIndx: "type" });
+                        }
+                        }
+                    ], icon: 'ui-icon-plus', cls: 'ui-state-default'},
+                    { type: 'button', icon: 'ui-icon-disk', label: '提交修改', style: 'margin:0px 5px;', listeners: [
+                        { "click": function (evt, ui) {
+                            acceptChanges();
+                        }
+                        }
+                    ]
+                    },
+                    { type: 'button', icon: 'ui-icon-cancel', label: '取消修改', listeners: [
+                        { "click": function (evt, ui) {
+                            $grid.pqGrid("rollback");
+                        }
+                        }
+                    ]
+                    },
+                    { type: 'separator' },
+                    { type: 'button', icon: 'ui-icon-cart', label: '获得修改', style: 'margin:0px 5px;', listeners: [
+                        { "click": function (evt, ui) {
+                            var changes = $grid.pqGrid("getChanges");
+                            try {
+                                console.log(changes);
+                            }
+                            catch (ex) { }
+                            alert("Please see the log of changes in your browser console.");
+                        }
+                        }
+                    ]
+                    }
 				]
 			},
+            //save the cell when cell loses focus.
+            quitEditMode: function (evt, ui) {                
+                if (evt.keyCode != $.ui.keyCode.ESCAPE) {
+                    $grid.pqGrid("saveEditCell");
+                }
+            },
 			refresh: function () {
                 $("#grid_array").find("button.delete_btn").button({ icons: { primary: 'ui-icon-scissors'} })
                 .unbind("click")
@@ -113,23 +190,98 @@
                     }
                 });
             },
+            cellBeforeSave: function (evt, ui) {	
+				/*var validObj = $grid.pqGrid("isValid",{rowIndx:ui.rowIndx,dataIndx:ui.dataIndx,value:ui.newVal});				
+                if (!validObj.valid) {
+                    evt.preventDefault();
+                    return false;
+                }*/
+				var isValid = grid.isValid(ui);
+                if (!isValid.valid) {
+                    evt.preventDefault();
+                    return false;
+                }
+            }
 		};
         obj.colModel = 
 		[
-			{ title: "优惠码", width: 150, dataType: "string" , align: "center"},
-			{ title: "类型", width: 70, dataType: "string" , align: "center"},
-			{ title: "优惠折扣", width: 70, dataType: "integer", align: "center"},
-			{ title: "优惠金额", width: 70, dataType: "integer", align: "center" },
-			{ title: "起用时间", width: 120, dataType: "string", align: "center" },
-			{ title: "截止时间", width: 120, dataType: "string", align: "center" },
-			{ title: "状态", width: 70, dataType: "string", align: "center" },
-			{ title: "使用时间", width: 100, dataType: "string", align: "center" },
-			{ title: "起用金额", width: 100, dataType: "string", align: "center" },
-			{ title: "使用者", width: 100, dataType: "float", align: "center"},
+			{ title: "优惠码", editable: false, width: 180, dataType: "string" ,dataIndx: "identify", align: "center"},
+			{ title: "类型", width: 68, dataType: "string" ,dataIndx: "type", align: "center",
+				render: function (ui) {
+					var rowData = ui.rowData; 
+					return typeStr[rowData[ui.dataIndx]];
+				},
+			},
+			{ title: "折扣", width: 68, dataType: "integer",dataIndx: "discount", align: "center",
+				validations: [
+					{ type: 'gte', value: 1, msg: "should be >= 1" },
+					{ type: 'lt', value: 100, msg: "should be < 100" }
+				],
+			},
+			{ title: "优惠金额", width: 80, dataType: "integer",dataIndx: "disprice", align: "center" ,
+				validations: [
+					{ type: 'gte', value: 1, msg: "should be >= 1" },
+					{ type: 'lte', value: 1000, msg: "should be <= 1000" }
+				],
+			},
+			{ title: "起用时间", width: 140, dataType: "integer",dataIndx: "starttime", align: "center" ,
+				render: function (ui) {		
+					if(ui.rowData[ui.dataIndx]==null)
+						return null;
+					var newDate = new Date();
+					var rowdata = parseInt(ui.rowData[ui.dataIndx]);
+					newDate.setTime( rowdata *1000);
+					return newDate.format('yyyy-MM-dd hh:mm:ss');
+				},
+			},
+			{ title: "截止时间", width: 140, dataType: "integer",dataIndx: "deadline", align: "center" ,
+				render: function (ui) {
+					if(ui.rowData[ui.dataIndx]==null)
+						return null;
+					var newDate = new Date();
+					var rowdata = parseInt(ui.rowData[ui.dataIndx]);
+					newDate.setTime( rowdata *1000);
+					return newDate.format('yyyy-MM-dd hh:mm:ss');
+				},
+			},
+			{ title: "状态", width: 68, dataType: "string",dataIndx: "status", align: "center",
+				render: function (ui) {
+					var rowData = ui.rowData; 
+					return statusStr[rowData[ui.dataIndx]];
+				},
+			},
+			{ title: "使用时间", width: 140, dataType: "integer",dataIndx: "usetime", align: "center" ,
+				render: function (ui) {
+					if(ui.rowData[ui.dataIndx]==null)
+						return null;
+					var newDate = new Date();
+					var rowdata = parseInt(ui.rowData[ui.dataIndx]);
+					newDate.setTime( rowdata *1000);
+					return newDate.format('yyyy-MM-dd hh:mm:ss');
+				},
+			},
+			{ title: "起用金额", width: 80, dataType: "string",dataIndx: "overprice", align: "center" },
+			{ title: "使用者", editable: false, width: 100, dataType: "float",dataIndx: "user", align: "center"},
+			{ title: "", editable: false, minWidth: 83, align: "center" , sortable: false, render: function (ui) {
+				return "<button type='button' class='delete_btn'>Delete</button>";
+				}
+			}
 		];
-        obj.dataModel = { data: data0 };
-        $grid = $("#grid_array").pqGrid(obj);
-        var grid = $grid.data("paramqueryPqGrid");
+        obj.dataModel = //{ data: data0 };
+		{                
+			dataType: "JSON",
+			location: "remote",
+			recIndx: "couponid",
+			//url: "/pro/products/get", //for ASP.NET
+			url: "{:U('get_grid_data')}", //for PHP
+			getData: function (response) {
+				return { data: response.data };
+			}
+		};
+        var $grid = $("#grid_array").pqGrid(obj);
+        var grid = $grid.data("paramquery-pqGrid");		//这里要注意一下官方的demo是错误的
+		//var grid = $grid.data();
+		//console.trace(grid);	
 		
 		//tobeverify
         function tobeverify() {    
@@ -186,11 +338,11 @@
     </script>
 </block>
 
-<block name="style">	
+<block name="stylex">	
 	<style type="text/css">	
-	.gridcss {
+	.gridcoupon {
 	  position:absolute;
-	  left:100px;
+	  left:0px;
 	  top:40px;
 	}
 	button.delete_btn
@@ -219,5 +371,5 @@
 </block>
 
 <block name="body">   	
-	<div id="grid_array" class = "gridcss" ></div>   
+	<div id="grid_array" class = "gridcoupon" ></div>   
 </block>

@@ -12,47 +12,30 @@
 <!--[if lt IE 9]>
 <script src="/onethink/Public/static/bootstrap/js/html5shiv.js"></script>
 <![endif]-->
-	
-	<style type="text/css">	
-	.gridcss {
-	  position:absolute;
-	  left:100px;
-	  top:40px;
-	}
-	button.delete_btn
-	{
-		margin:-3px 0px;
-	}
-	tr.pq-row-delete
-	{
-		text-decoration:line-through;         
-	}
-	tr.pq-row-delete td
-	{
-		background-color:pink;   
-	}
-	</style>
-
 <!--[if lt IE 9]>
 <script type="text/javascript" src="/onethink/Public/static/jquery-1.10.2.min.js"></script>
 <![endif]-->
 <!--[if gte IE 9]><!-->
 <script type="text/javascript" src="/onethink/Public/static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/onethink/Public/static/bootstrap/js/bootstrap.min.js"></script>
-
 <!--jQuery dependencies
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
-	<link rel="stylesheet" href="/onethink/Public/static/jquery-ui.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="/onethink/Public/static/jquery-ui-1.12.0/jquery-ui.css" />
+    <script src="/onethink/Public/static/jquery-ui-1.12.0/jquery-ui.min.js"></script>	-->
+	<link rel="stylesheet" href="/onethink/Public/static/jquery-ui-1.9.2/themes/base/jquery-ui.css" />
+    <script src="/onethink/Public/static/jquery-ui-1.9.2/ui/minified/jquery-ui.min.js"></script>	
     <!--<script src="/onethink/Public/static/jquery.min.js"></script>    -->
-    <script src="/onethink/Public/static/jquery-ui.min.js"></script>
 	
     <link href="/onethink/Public/static/grid-2.0.4/pqgrid.min.css" type="text/css" rel="stylesheet"/>
 <!--PQ Grid Office theme-->
     <link rel="stylesheet" href="/onethink/Public/static/grid-2.0.4/themes/office/pqgrid.css" />
 	
     <script src="/onethink/Public/static/grid-2.0.4/pqgrid.min.js"></script>
+    <script src="/onethink/Application/Home/Public/js/common.js"></script>
+
+
 
 <!--<![endif]-->
 <!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
@@ -237,6 +220,30 @@
                 return null;
             }
         }
+		
+		var toolbar0 = {
+				items:[
+				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-highlight'},
+				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}
+				]
+			};
+		
+		var toolbar1 = {
+				items:[
+				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-highlight'},
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}
+				]
+			};
+			
+		var toolbar2 = {
+				items:[
+				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-highlight'}
+				]
+			};
 
         var obj = { 
 			width: 1000,
@@ -244,13 +251,13 @@
 			title: "提现审核列表",
 			resizable:false,
 			draggable:true ,
-			toolbar:{
+			/*toolbar:{
 				items:[
-				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-pencil'},
-				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-pencil'},
-				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-pencil'}
+				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-highlight'},
+				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-default'},
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}
 				]
-			},
+			},*/
 			refresh: function () {
                 $("#grid_array").find("button.delete_btn").button({ icons: { primary: 'ui-icon-scissors'} })
                 .unbind("click")
@@ -290,7 +297,9 @@
 			}
 		];
         obj.dataModel = { data: data0 };
+		obj.toolbar = toolbar0;
         $grid = $("#grid_array").pqGrid(obj);
+		//$( "grid_array" ).pqGrid( { toolbar: toolbar } );
         var grid = $grid.data("paramqueryPqGrid");
 		
 		//tobeverify
@@ -307,6 +316,7 @@
 				}
 			];
 			obj.dataModel = { data: data0 };
+			obj.toolbar = toolbar0;
 			$("#grid_array").pqGrid("destroy");
 			$grid = $("#grid_array").pqGrid(obj);
         }
@@ -324,6 +334,7 @@
 			];
 			
 			obj.dataModel = { data: data1 };
+			obj.toolbar = toolbar1;
 			
 			$("#grid_array").pqGrid("destroy");
 			$grid = $("#grid_array").pqGrid(obj);
@@ -340,6 +351,7 @@
 			];
 			
 			obj.dataModel = { data: data2 };
+			obj.toolbar = toolbar2;
 			
 			$("#grid_array").pqGrid("destroy");
 			$grid = $("#grid_array").pqGrid(obj);

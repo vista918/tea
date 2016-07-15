@@ -34,7 +34,14 @@
 	
     <script src="/onethink/Public/static/grid-2.0.4/pqgrid.min.js"></script>
     <script src="/onethink/Application/Home/Public/js/common.js"></script>
-
+	
+	<style type="text/css">	
+	.gridcss {
+	  position:absolute;
+	  left:0px;
+	  top:40px;
+	}
+	</style>
 
 
 <!--<![endif]-->
@@ -140,28 +147,7 @@
 </script>
 
     <script type="text/javascript">	  
-	// 对Date的扩展，将 Date 转化为指定格式的String
-	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
-	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
-	// 例子： 
-	// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-	// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-	Date.prototype.format = function (fmt) { //author: meizz 
-		var o = {
-			"M+": this.getMonth() + 1, //月份 
-			"d+": this.getDate(), //日 
-			"h+": this.getHours(), //小时 
-			"m+": this.getMinutes(), //分 
-			"s+": this.getSeconds(), //秒 
-			"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-			"S": this.getMilliseconds() //毫秒 
-		};
-		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-		for (var k in o)
-		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-		return fmt;
-	}
-	
+		
     $(function () {
 		//document.write(<?php echo ($totalgoods[3]['goodsid']); ?>);
 		var datafromcontroller = <?php echo json_encode($totalorder)?>;
@@ -186,35 +172,257 @@
 			data[i][7] = datafromcontroller[i].deliverymoney;
 			data[i][8] = "to be done...";
 		}
-		//data[0].push(1, 'Exxon Mobil', '339,938.0', '36,130.0');
-		//data[1] = new array();
-		//data[1] = [1, 'Exxon Mobil', '339,938.0', '36,130.0'];
-        //var data = [[1, 'Exxon Mobil', '339,938.0', '36,130.0'],
-        //    [2, 'Wal-Mart Stores', '315,654.0', '11,231.0']];
+		
+						
+        function getRowIndx() {
+            var arr = $grid.pqGrid("selection", { type: 'row', method: 'getSelection' });
+            if (arr && arr.length > 0) {
+                return arr[0].rowIndx;                                
+            }
+            else {
+                alert("Select a row.");
+                return null;
+            }
+        }
 
+		var ajaxObj = {
+            dataType: "json",
+            url: "<?php echo U('grid');?>", //for PHP
+            //contentType: "application/json; charset=utf-8",//for ASP.NET
+            type: "POST",
+            async: true,
+            beforeSend: function (jqXHR, settings) {                
+                $grid.pqGrid("showLoading");
+            }
+        };
+
+        //called when accept changes button is clicked.
+        function acceptChanges() {
+            //attempt to save editing cell.
+            //debugger;
+            if (grid.saveEditCell() === false) {
+                return false;
+            }
+
+            var isDirty = grid.isDirty();
+            if (isDirty) {
+                //validate the new added rows.                
+                var addList = grid.getChanges().addList;
+                for (var i = 0; i < addList.length; i++) {
+                    var rowData = addList[i];
+                    var isValid = grid.isValid({ "rowData": rowData }).valid;
+                    if (!isValid) {
+                        return;
+                    }
+                }
+                var changes = grid.getChanges({ format: "byVal" });
+				//console.trace(changes);
+
+                //post changes to server 
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    async: true,
+                    beforeSend: function (jqXHR, settings) {
+                        grid.showLoading();
+                    },
+                    //url: "/pro/products/batch", //for ASP.NET, java                                                
+					url: "<?php echo U('grid');?>",
+                    data: { list: JSON.stringify(changes) },
+                    success: function (changes) {
+                        //debugger;
+                        grid.commit({ type: 'add', rows: changes.addList });
+                        grid.commit({ type: 'update', rows: changes.updateList });
+                        grid.commit({ type: 'delete', rows: changes.deleteList });
+
+                    },
+                    complete: function () {
+                        grid.hideLoading();
+                    }
+                });
+            }
+        }
+		
+		var dateEditor = function (ui) {
+            var $cell = ui.$cell,
+                rowData = ui.rowData,
+                dataIndx = ui.dataIndx,
+                cls = ui.cls,
+                dc = $.trim(rowData[dataIndx]);
+            $cell.css('padding', '0');
+
+            var $inp = $("<input type='text' id = 'datapickerinput' name='" + dataIndx + "' class='" + cls + " pq-date-editor' />")
+            .appendTo($cell)
+            .val(dc).datepicker({
+				regional: "zh" ,
+                changeMonth: true,
+                changeYear: true,
+				showButtonPanel:true,//是否显示按钮面板 
+				//yearSuffix: '年', //年的后缀 
+				dateFormat: 'yy-mm-dd',//日期格式
+				showMonthAfterYear:true,//是否把月放在年的后面 
+				//defaultDate: dc,//默认日期
+				minDate:'-1Y', //最小日期 
+				maxDate:"+1Y +0M +0D",//最大日期 
+                onClose: function () {
+                    $inp.focus();
+                }
+            });
+            //.focus();
+		}
+		
         var obj = { 
-			width: 1000,
+			width: 1200,
 			height: 600,
 			title: "订单列表",
 			resizable:false,
-			draggable:false 
+			draggable:false ,
+            scrollModel: {
+                autoFit: true
+            },
+            selectionModel: {
+                type: 'cell'
+            },
+            track: true, //to turn on the track changes.
+            hoverMode: 'cell',
+            editModel: {
+				clicksToEdit: 1, 
+                saveKey: $.ui.keyCode.ENTER,
+                select: false,
+                keyUpDown: false,
+                cellBorderWidth: 0  
+            },
+            editor: { type: "textbox" },
+            pageModel: { type: "local", rPP: 10, rPPOptions: [10, 20, 50, 100] },
+			toolbar:{
+				items:[
+				{type : "button",label: '新订单', /*style: 'margin:2px 0px;',*/ listeners: [
+                        { "click": function (evt, ui) {
+                            //append empty row at the end.                            
+                            var rowData = { identify: generateMixed(20) , type : 0, disprice : 20, status : 0,
+								discount : 90, starttime: getDateStr(0) , deadline: getDateStr(30), overprice: 100, usetime: '0000-00-00' , user: "" }; //empty row
+                            var rowIndx = $grid.pqGrid("addRow", { rowData: rowData });
+                            $grid.pqGrid("goToPage", { rowIndx: rowIndx });
+                            $grid.pqGrid("editCell", { rowIndx: rowIndx, dataIndx: "type" });
+                        }
+                        }
+                    ], icon: 'ui-icon-plus', cls: 'ui-state-default'},
+                    { type: 'button', icon: 'ui-icon-disk', label: '提交修改', style: 'margin:0px 5px;', listeners: [
+                        { "click": function (evt, ui) {
+                            acceptChanges();
+                        }
+                        }
+                    ]
+                    },
+                    { type: 'button', icon: 'ui-icon-cancel', label: '取消修改', listeners: [
+                        { "click": function (evt, ui) {
+                            $grid.pqGrid("rollback");
+                        }
+                        }
+                    ]
+                    },
+                    { type: 'separator' },
+                    { type: 'button', icon: 'ui-icon-cart', label: '获得修改', style: 'margin:0px 5px;', listeners: [
+                        { "click": function (evt, ui) {
+                            var changes = $grid.pqGrid("getChanges");
+                            try {
+                                console.log(changes);
+                            }
+                            catch (ex) { }
+                            alert("Please see the log of changes in your browser console.");
+                        }
+                        }
+                    ]
+                    }
+				]
+			},
+            //save the cell when cell loses focus.
+            quitEditMode: function (evt, ui) {                
+                if (evt.keyCode != $.ui.keyCode.ESCAPE && evt.keyCode != $.ui.keyCode.TAB) {
+                    $grid.pqGrid("saveEditCell");
+                }
+            },
+			refresh: function () {
+                $("#grid_array").find("button.delete_btn").button({ icons: { primary: 'ui-icon-scissors'} })
+                .unbind("click")
+                .bind("click", function (evt) {
+                    var $tr = $(this).closest("tr");
+                    var obj = $grid.pqGrid("getRowIndx", { $tr: $tr });
+                    var rowIndx = obj.rowIndx;
+                    $grid.pqGrid("addClass", { rowIndx: rowIndx, cls: 'pq-row-delete' });
+
+                    var ans = window.confirm("Are you sure to delete row No " + (rowIndx + 1) + "?");
+
+                    if (ans) {
+                        $grid.pqGrid("deleteRow", { rowIndx: rowIndx, effect: true, complete: function () {
+                            $grid.pqGrid("removeClass", { rowIndx: rowIndx, cls: 'pq-row-delete' });
+                        }
+                        });
+                    }
+                    else {
+                        $grid.pqGrid("removeClass", { rowIndx: rowIndx, cls: 'pq-row-delete' });
+                    }
+                });
+            },
+            cellBeforeSave: function (evt, ui) {	
+				/*var validObj = $grid.pqGrid("isValid",{rowIndx:ui.rowIndx,dataIndx:ui.dataIndx,value:ui.newVal});				
+                if (!validObj.valid) {
+                    evt.preventDefault();
+                    return false;
+                }*/			
+				//console.trace(ui.newVal);
+				var isValid = grid.isValid(ui);	
+				//console.trace(isValid);
+                if (!isValid.valid) {
+					//console.trace(grid);
+					$grid.find(".pq-editor-focus").css({ "border-color": "red" });
+                    //evt.preventDefault();
+                    return false;
+                }				
+            }
 		};
-		
+        
         obj.colModel = 
 		[
-			{ title: "商品信息", width: 200, dataType: "string" , align: "center"},
-			{ title: "订单类别", width: 80, dataType: "string" , align: "center"},
-			{ title: "金额(￥)", width: 100, dataType: "float", align: "center" },
-			{ title: "优惠码", width: 80, dataType: "string", align: "center"},
-			{ title: "实付款(￥)", width: 80, dataType: "float", align: "center" },
-			{ title: "客户", width: 120, dataType: "string", align: "center"},
-			{ title: "状态", width: 80, dataType: "string", align: "center" },
-			{ title: "物流费", width: 80, dataType: "float", align: "center"},
-			{ title: "操作", width: 150, dataType: "string", align: "center"}
+			{ title: "订单编号",editable: false, width: 100, dataType: "integer", dataIndx:'orderid' , align: "center"},
+			{ title: "订单类别", width: 80, dataType: "string" ,dataIndx:'type', align: "center",
+				render: function (ui) {
+					var rowData = ui.rowData; 
+					return typeStr[rowData[ui.dataIndx]];
+				},
+			},
+			{ title: "金额(￥)", editable: false, width: 100, dataType: "float" , dataIndx:'ordermoney', align: "center" },
+			{ title: "优惠码", editable: false, width: 200, dataType: "string", dataIndx:'couponidentify', align: "center"},
+			{ title: "实付款(￥)", editable: false, width: 80, dataType: "float" , dataIndx:'finalmoney', align: "center" },
+			{ title: "客户", width: 120, dataType: "string", dataIndx:'buyername', align: "center"},
+			{ title: "状态", width: 80, dataType: "string",  dataIndx:'status' , align: "center" ,
+				render: function (ui) {
+					var rowData = ui.rowData; 
+					return statusStr[rowData[ui.dataIndx]];
+				},
+			},
+			{ title: "物流费", width: 80, dataType: "float", dataIndx:'deliverymoney', align: "center"},
+			{ title: "", editable: false, minWidth: 83, align: "center" , sortable: false, render: function (ui) {
+				return "<button type='button' class='delete_btn'>Delete</button>";
+				}
+			}
 		];
-        obj.dataModel = { data: data };
-        $("#grid_array").pqGrid(obj);
-
+		
+        obj.dataModel = //{ data: data0 };
+		{                
+			dataType: "JSON",
+			location: "remote",
+			recIndx: "orderid",
+			//url: "/pro/products/get", //for ASP.NET
+			url: "<?php echo U('get_grid_data');?>", //for PHP
+			getData: function (response) {
+				return { data: response.data };
+			}
+		};
+        var $grid = $("#grid_array").pqGrid(obj);
+        var grid = $grid.data("paramquery-pqGrid");		//这里要注意一下官方的demo是错误的
+		//var grid = $grid.data();
+		//console.trace(grid);		
     });     
     </script>
  <!-- 用于加载js代码 -->

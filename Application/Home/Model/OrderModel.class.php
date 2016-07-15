@@ -131,8 +131,9 @@ class OrderModel extends Model
         }else
             return null;
 
-        $totalmoney = ($totalmoney-$disprice) * $discount / 100;
+		$retVal[] = $totalmoney;
+        $retVal[] = ($totalmoney-$disprice) * $discount / 100;
 
-        return $totalmoney;
+        return $retVal;
     }
 }

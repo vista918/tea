@@ -1,52 +1,16 @@
 ﻿<extend name="Base/common"/>
-
-<block name="stylex">
-<!--jQuery dependencies
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
-	<link rel="stylesheet" href="__STATIC__/jquery-ui.css" />
-    <!--<script src="__STATIC__/jquery.min.js"></script>    -->
-    <script src="__STATIC__/jquery-ui.min.js"></script>
 	
-    <link href="__STATIC__/grid-2.0.4/pqgrid.min.css" type="text/css" rel="stylesheet"/>
-<!--PQ Grid Office theme-->
-    <link rel="stylesheet" href="__STATIC__/grid-2.0.4/themes/office/pqgrid.css" />
-	
-    <script src="__STATIC__/grid-2.0.4/pqgrid.min.js"></script>
+<block name="srciptx">
 </block>
 	
 <block name="script">
-    <script type="text/javascript">	  
-	// 对Date的扩展，将 Date 转化为指定格式的String
-	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
-	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
-	// 例子： 
-	// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-	// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-	Date.prototype.format = function (fmt) { //author: meizz 
-		var o = {
-			"M+": this.getMonth() + 1, //月份 
-			"d+": this.getDate(), //日 
-			"h+": this.getHours(), //小时 
-			"m+": this.getMinutes(), //分 
-			"s+": this.getSeconds(), //秒 
-			"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-			"S": this.getMilliseconds() //毫秒 
-		};
-		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-		for (var k in o)
-		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-		return fmt;
-	}
-	
+    <script type="text/javascript">	  	
     $(function () {
-		//document.write({$totalgoods[3]['goodsid']});
+		/*
 		var datafromcontroller = <?php echo json_encode($totalgoods)?>;
 		//console.trace(datafromcontroller.length);
 		var countofgoods = datafromcontroller.length;// count({$totalgoods});
 		var data = new Array(countofgoods);
-		var statusStr = ['已上架','待下架','已下架'];
 		for(i = 0 ; i < countofgoods; ++i)
 		{
 			data[i] = new Array();			
@@ -61,60 +25,248 @@
 			data[i][6] = statusStr[datafromcontroller[i].status];//验证阶段需要在数据库插入的时候做
 			data[i][7] = datafromcontroller[i].priority;
 			data[i][8] = 0;
-		}
-		//data[0].push(1, 'Exxon Mobil', '339,938.0', '36,130.0');
-		//data[1] = new array();
-		//data[1] = [1, 'Exxon Mobil', '339,938.0', '36,130.0'];
-        //var data = [[1, 'Exxon Mobil', '339,938.0', '36,130.0'],
-        //    [2, 'Wal-Mart Stores', '315,654.0', '11,231.0']];
+		}*/
+		var statusStr = ['已上架','待下架','已下架'];
+		
+		var ajaxObj = {
+            dataType: "json",
+            url: "{:U('grid')}", //for PHP
+            //contentType: "application/json; charset=utf-8",//for ASP.NET
+            type: "POST",
+            async: true,
+            beforeSend: function (jqXHR, settings) {                
+                $grid.pqGrid("showLoading");
+            }
+        };
+
+        //called when accept changes button is clicked.
+        function acceptChanges() {
+            //attempt to save editing cell.
+            //debugger;
+            if (grid.saveEditCell() === false) {
+                return false;
+            }
+            var isDirty = grid.isDirty();
+			//	console.trace(isDirty);
+            if (isDirty) {
+                //validate the new added rows.                
+                var addList = grid.getChanges().addList;
+                for (var i = 0; i < addList.length; i++) {
+                    var rowData = addList[i];
+                    var isValid = grid.isValid({ "rowData": rowData }).valid;
+                    if (!isValid) {
+                        return;
+                    }
+                }
+				
+                var changes = grid.getChanges({ format: "byVal" });
+				//console.trace(changes);
+
+                //post changes to server 
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    async: true,
+                    beforeSend: function (jqXHR, settings) {
+                        grid.showLoading();
+                    },
+                    //url: "/pro/products/batch", //for ASP.NET, java                                                
+					url: "{:U('grid')}",
+                    data: { list: JSON.stringify(changes) },
+                    success: function (changes) {
+                        //debugger;
+                        grid.commit({ type: 'add', rows: changes.addList });
+                        grid.commit({ type: 'update', rows: changes.updateList });
+                        grid.commit({ type: 'delete', rows: changes.deleteList });
+
+                    },
+                    complete: function () {
+                        grid.hideLoading();
+                    }
+                });
+            }
+        }
 
         var obj = { 
-			width: 1000,
+			width: 1200,
 			height: 600,
 			title: "商品列表",
 			resizable:false,
-			draggable:false 
+			draggable:false ,
+            scrollModel: {
+                autoFit: true
+            },
+            selectionModel: {
+                type: 'cell'
+            },
+            track: true, //to turn on the track changes.
+            hoverMode: 'cell',
+            editModel: {
+				clicksToEdit: 1, 
+                saveKey: $.ui.keyCode.ENTER,
+                select: false,
+                keyUpDown: false,
+                cellBorderWidth: 0  
+            },
+            editor: { type: "textbox" },
+            pageModel: { type: "local", rPP: 10, rPPOptions: [10, 20, 50, 100] },
+			toolbar:{
+				items:[
+					{
+						type : "button",label: '新商品', /*style: 'margin:2px 0px;',*/ 
+						listeners: [
+							{ "click": function (evt, ui) {
+								//append empty row at the end.                            
+								var rowData = { status : 0 }; //empty row
+								var rowIndx = $grid.pqGrid("addRow", { rowData: rowData });
+								$grid.pqGrid("goToPage", { rowIndx: rowIndx });
+								$grid.pqGrid("editCell", { rowIndx: rowIndx, dataIndx: "type" });
+								}
+							}
+						],
+						icon: 'ui-icon-plus', cls: 'ui-state-default'
+					},
+                    { type: 'button', icon: 'ui-icon-disk', label: '提交修改', style: 'margin:0px 5px;', listeners: [
+                        { "click": function (evt, ui) {
+                            acceptChanges();
+                        }
+                        }
+                    ]
+                    },
+                    { type: 'button', icon: 'ui-icon-cancel', label: '取消修改', listeners: [
+                        { "click": function (evt, ui) {
+                            $grid.pqGrid("rollback");
+                        }
+                        }
+                    ]
+                    },
+                    { type: 'separator' },
+                    { type: 'button', icon: 'ui-icon-cart', label: '获得修改', style: 'margin:0px 5px;', listeners: [
+                        { "click": function (evt, ui) {
+                            var changes = $grid.pqGrid("getChanges");
+                            try {
+                                console.log(changes);
+                            }
+                            catch (ex) { }
+                            alert("Please see the log of changes in your browser console.");
+                        }
+                        }
+                    ]
+                    }
+				]
+			},
+            //save the cell when cell loses focus.
+			//save the cell when cell loses focus.
+            quitEditMode: function (evt, ui) {                
+                if (evt.keyCode != $.ui.keyCode.ESCAPE && evt.keyCode != $.ui.keyCode.TAB) {
+                    $grid.pqGrid("saveEditCell");
+                }
+            },
+			refresh: function () {
+                $("#grid_array").find("button.delete_btn").button({ icons: { primary: 'ui-icon-scissors'} })
+                .unbind("click")
+                .bind("click", function (evt) {
+                    var $tr = $(this).closest("tr");
+                    var obj = $grid.pqGrid("getRowIndx", { $tr: $tr });
+                    var rowIndx = obj.rowIndx;
+                    $grid.pqGrid("addClass", { rowIndx: rowIndx, cls: 'pq-row-delete' });
+
+                    var ans = window.confirm("Are you sure to delete row No " + (rowIndx + 1) + "?");
+
+                    if (ans) {
+                        $grid.pqGrid("deleteRow", { rowIndx: rowIndx, effect: true, complete: function () {
+                            $grid.pqGrid("removeClass", { rowIndx: rowIndx, cls: 'pq-row-delete' });
+                        }
+                        });
+                    }
+                    else {
+                        $grid.pqGrid("removeClass", { rowIndx: rowIndx, cls: 'pq-row-delete' });
+                    }
+                });
+            },
+            cellBeforeSave: function (evt, ui) {	
+				/*var validObj = $grid.pqGrid("isValid",{rowIndx:ui.rowIndx,dataIndx:ui.dataIndx,value:ui.newVal});				
+                if (!validObj.valid) {
+                    evt.preventDefault();
+                    return false;
+                }*/			
+				//console.trace(ui.newVal);
+				var isValid = grid.isValid(ui);	
+				//console.trace(isValid);
+                if (!isValid.valid) {
+					//console.trace(grid);
+					$grid.find(".pq-editor-focus").css({ "border-color": "red" });
+                    //evt.preventDefault();
+                    return false;
+                }				
+            }
 		};
 		
         obj.colModel = 
 		[
-			{ title: "商品编号", width: 80, dataType: "integer" },
-			{ title: "商品名称", width: 120, dataType: "string" },
-			{ title: "销售价(￥)", width: 100, dataType: "float", align: "right" },
-			{ title: "库存", width: 80, dataType: "float", align: "right"},
-			{ title: "销量", width: 80, dataType: "float", align: "right" },
-			{ title: "上架时间", width: 160, dataType: "string", align: "right"},
-			{ title: "商品状态", width: 80, dataType: "float", align: "right" },
-			{ title: "优先级", width: 80, dataType: "float", align: "right"},
-			{ title: "操作", width: 150, dataType: "float", align: "right"}
+			//{ title: "商品编号", width: 80, dataType: "integer" , dataIndx: 'goodsid', editable:false, align: "center" },
+			{ title: "商品名称", width: 120, dataType: "string"  , dataIndx: 'name', align: "center"},
+			{ title: "销售价(￥)", width: 100, dataType: "float", align: "center"  , dataIndx: 'curprice'},
+			{ title: "库存", width: 80, dataType: "float", align: "center" , dataIndx: 'stock'},
+			{ title: "销量", width: 80, dataType: "float", align: "center"  , dataIndx: 'sales'},
+			{ title: "上架时间", width: 160, dataType: "string", align: "center" , dataIndx: 'createtime'},
+			{ title: "商品状态", width: 80, dataType: "float", align: "center"  , dataIndx: 'status',
+				render: function (ui) {
+					var rowData = ui.rowData; 
+					return statusStr[rowData[ui.dataIndx]];
+				},
+			},
+			{ title: "优先级", width: 80, dataType: "float", align: "center" , dataIndx: 'priority'},
+			{ title: "简介", width: 160, dataType: "string", align: "center" , dataIndx: 'brief',
+				editModel: { keyUpDown: true },
+				 validations: [
+					{ type: 'minLen', value: 1, msg: 'length < 1' },
+					{ type: 'maxLen', value: 100, msg: 'length > 100' }
+                ],
+			},
+			{ title: "分类", width: 80, dataType: "float", align: "center"  , dataIndx: 'category'},
+			{ title: "单位", width: 80, dataType: "string", align: "center" , dataIndx: 'unit'},
+			{ title: "", editable: false, minWidth: 83, align: "center" , sortable: false, render: function (ui) {
+				return "<button type='button' class='delete_btn'>Delete</button>";
+				}
+			}
 		];
-        obj.dataModel = { data: data };
-        $("#grid_array").pqGrid(obj);
-
+        obj.dataModel = //{ data: data0 };
+		{                
+			dataType: "JSON",
+			location: "remote",
+			recIndx: "goodsid",		//修改与否与此关键字有很大关系
+			//url: "/pro/products/get", //for ASP.NET
+			url: "{:U('get_grid_data')}", //for PHP
+			getData: function (response) {
+				return { data: response.data };
+			}
+		};
+        var $grid = $("#grid_array").pqGrid(obj);
+        var grid = $grid.data("paramquery-pqGrid");		//这里要注意一下官方的demo是错误的
+		//var grid = $grid.data();
     });   
     </script>
 </block>
 
-<block name="style">	
-	<style type="text/css">	
-	.concss {
-	  position:absolute;
-	  left:495px;
-	  top:80px;
-	  width:700px;
-	  height:300px;
-	}
-	.concss2 {
-	  position:absolute;
-	  left:495px;
-	  top:422px;
-	  width:700px;
-	  height:300px;
-	}
+<block name="stylex">	
+	<style type="text/css">		
 	.gridcss {
 	  position:absolute;
-	  left:100px;
+	  left:0px;
 	  top:40px;
+	}
+	button.delete_btn
+	{
+		margin:-3px 0px;
+	}
+	tr.pq-row-delete
+	{
+		text-decoration:line-through;         
+	}
+	tr.pq-row-delete td
+	{
+		background-color:pink;   
 	}
 	</style>
 </block>

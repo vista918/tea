@@ -12,26 +12,6 @@
 		var data0 = new Array(totalcoupon.length);
 		var typeStr = ['折扣型','金额型'];
 		var statusStr = ['未使用','已使用'];
-				
-		//填充待审核表数据
-		for(i = 0 ; i < totalcoupon.length; ++i)
-		{
-			var newDate = new Date();
-			data0[i] = new Array();			
-			data0[i]["identify"] = totalcoupon[i].identify;
-			data0[i]["type"] = typeStr[totalcoupon[i].type];
-			data0[i]["discount"] = totalcoupon[i].discount;
-			data0[i]["disprice"] = totalcoupon[i].disprice;
-			newDate.setTime(totalcoupon[i].starttime *1000);
-			data0[i]["starttime"] = newDate.format('yyyy-MM-dd hh:mm:ss');
-			newDate.setTime(totalcoupon[i].deadline *1000);
-			data0[i]["deadline"] = newDate.format('yyyy-MM-dd hh:mm:ss');
-			data0[i]["status"] = statusStr[totalcoupon[i].status];
-			newDate.setTime(totalcoupon[i].usetime *1000);
-			data0[i]["usetime"] = newDate.format('yyyy-MM-dd hh:mm:ss');
-			data0[i]["overprice"] = totalcoupon[i].overprice;
-			data0[i]["user"] = "";
-		}
 						
         function getRowIndx() {
             var arr = $grid.pqGrid("selection", { type: 'row', method: 'getSelection' });
@@ -102,23 +82,56 @@
             }
         }
 		
+		var dateEditor = function (ui) {
+            var $cell = ui.$cell,
+                rowData = ui.rowData,
+                dataIndx = ui.dataIndx,
+                cls = ui.cls,
+                dc = $.trim(rowData[dataIndx]);
+            $cell.css('padding', '0');
+
+            var $inp = $("<input type='text' id = 'datapickerinput' name='" + dataIndx + "' class='" + cls + " pq-date-editor' />")
+            .appendTo($cell)
+            .val(dc).datepicker({
+				regional: "zh" ,
+                changeMonth: true,
+                changeYear: true,
+				showButtonPanel:true,//是否显示按钮面板 
+				//yearSuffix: '年', //年的后缀 
+				dateFormat: 'yy-mm-dd',//日期格式
+				showMonthAfterYear:true,//是否把月放在年的后面 
+				//defaultDate: dc,//默认日期
+				minDate:'-1Y', //最小日期 
+				maxDate:"+1Y +0M +0D",//最大日期 
+                onClose: function () {
+                    $inp.focus();
+                }
+            });
+            //.focus();
+		}
+		
         var obj = { 
 			width: 1200,
 			height: 600,
 			title: "优惠码列表",
 			resizable:false,
-			draggable:true ,
+			draggable:false ,
             scrollModel: {
                 autoFit: true
             },
             selectionModel: {
-                type: ''
+                type: 'cell'
             },
             track: true, //to turn on the track changes.
             hoverMode: 'cell',
             editModel: {
-                saveKey: $.ui.keyCode.ENTER
+				clicksToEdit: 1, 
+                saveKey: $.ui.keyCode.ENTER,
+                select: false,
+                keyUpDown: false,
+                cellBorderWidth: 0  
             },
+            editor: { type: "textbox" },
             pageModel: { type: "local", rPP: 10, rPPOptions: [10, 20, 50, 100] },
 			toolbar:{
 				items:[
@@ -126,7 +139,7 @@
                         { "click": function (evt, ui) {
                             //append empty row at the end.                            
                             var rowData = { identify: generateMixed(20) , type : 0, disprice : 20, status : 0,
-								discount : 90, starttime: getLocalTime(0) , deadline: getLocalTime(30), overprice: 100, usetime: null , user: "" }; //empty row
+								discount : 90, starttime: getDateStr(0) , deadline: getDateStr(30), overprice: 100, usetime: '0000-00-00' , user: "" }; //empty row
                             var rowIndx = $grid.pqGrid("addRow", { rowData: rowData });
                             $grid.pqGrid("goToPage", { rowIndx: rowIndx });
                             $grid.pqGrid("editCell", { rowIndx: rowIndx, dataIndx: "type" });
@@ -164,7 +177,7 @@
 			},
             //save the cell when cell loses focus.
             quitEditMode: function (evt, ui) {                
-                if (evt.keyCode != $.ui.keyCode.ESCAPE) {
+                if (evt.keyCode != $.ui.keyCode.ESCAPE && evt.keyCode != $.ui.keyCode.TAB) {
                     $grid.pqGrid("saveEditCell");
                 }
             },
@@ -195,12 +208,16 @@
                 if (!validObj.valid) {
                     evt.preventDefault();
                     return false;
-                }*/
-				var isValid = grid.isValid(ui);
+                }*/			
+				//console.trace(ui.newVal);
+				var isValid = grid.isValid(ui);	
+				//console.trace(isValid);
                 if (!isValid.valid) {
-                    evt.preventDefault();
+					//console.trace(grid);
+					$grid.find(".pq-editor-focus").css({ "border-color": "red" });
+                    //evt.preventDefault();
                     return false;
-                }
+                }				
             }
 		};
         obj.colModel = 
@@ -212,36 +229,52 @@
 					return typeStr[rowData[ui.dataIndx]];
 				},
 			},
-			{ title: "折扣", width: 68, dataType: "integer",dataIndx: "discount", align: "center",
+			{ title: "折扣", width: 68, dataType: "integer",dataIndx: "discount", align: "center",			        
+				editModel: { keyUpDown: true },
 				validations: [
 					{ type: 'gte', value: 1, msg: "should be >= 1" },
 					{ type: 'lt', value: 100, msg: "should be < 100" }
 				],
 			},
-			{ title: "优惠金额", width: 80, dataType: "integer",dataIndx: "disprice", align: "center" ,
+			{ title: "优惠金额", width: 80, dataType: "integer",dataIndx: "disprice", align: "center" ,		
+				editModel: { keyUpDown: true },
 				validations: [
 					{ type: 'gte', value: 1, msg: "should be >= 1" },
 					{ type: 'lte', value: 1000, msg: "should be <= 1000" }
 				],
 			},
-			{ title: "起用时间", width: 140, dataType: "integer",dataIndx: "starttime", align: "center" ,
+			{ title: "起用时间", width: 100, dataIndx: "starttime", align: "center" ,
+				editor: {
+		            type: dateEditor
+		        },
+		        validations: [
+                    { type: 'regexp', value: '[0-9]{4}-[0-9]{2}-[0-9]{2}', msg: 'Not in yyyy-mm-dd format' },
+					{ type: 'minLen', value: 10, msg: 'length < 10' },
+					{ type: 'maxLen', value: 10, msg: 'length > 10' }
+                ],
 				render: function (ui) {		
-					if(ui.rowData[ui.dataIndx]==null)
-						return null;
-					var newDate = new Date();
-					var rowdata = parseInt(ui.rowData[ui.dataIndx]);
-					newDate.setTime( rowdata *1000);
-					return newDate.format('yyyy-MM-dd hh:mm:ss');
+					if(ui.rowData[ui.dataIndx]=='')
+					{
+						return null;					
+					}
+					return ui.rowData[ui.dataIndx];
 				},
 			},
-			{ title: "截止时间", width: 140, dataType: "integer",dataIndx: "deadline", align: "center" ,
+			{ title: "截止时间", width: 100, dataIndx: "deadline", align: "center" ,
+				editor: {
+		            type: dateEditor
+		        },
+		        validations: [
+                    { type: 'regexp', value: '[0-9]{4}-[0-9]{2}-[0-9]{2}', msg: 'Not in yyyy-mm-dd format' },
+					{ type: 'minLen', value: 10, msg: 'length < 10' },
+					{ type: 'maxLen', value: 10, msg: 'length > 10' }
+                ],
 				render: function (ui) {
-					if(ui.rowData[ui.dataIndx]==null)
-						return null;
-					var newDate = new Date();
-					var rowdata = parseInt(ui.rowData[ui.dataIndx]);
-					newDate.setTime( rowdata *1000);
-					return newDate.format('yyyy-MM-dd hh:mm:ss');
+					if(ui.rowData[ui.dataIndx]=='')
+					{
+						return null;					
+					}
+					return ui.rowData[ui.dataIndx];
 				},
 			},
 			{ title: "状态", width: 68, dataType: "string",dataIndx: "status", align: "center",
@@ -250,18 +283,30 @@
 					return statusStr[rowData[ui.dataIndx]];
 				},
 			},
-			{ title: "使用时间", width: 140, dataType: "integer",dataIndx: "usetime", align: "center" ,
+			{ title: "使用时间", width: 100, dataIndx: "usetime", align: "center" , //editable : false,
+				editor: {
+		            type: dateEditor
+		        },
+		        validations: [
+                    { type: 'regexp', value: '[0-9]{4}-[0-9]{2}-[0-9]{2}', msg: 'Not in yyyy-mm-dd format' },
+					{ type: 'minLen', value: 10, msg: 'length < 10' },
+					{ type: 'maxLen', value: 10, msg: 'length > 10' }
+                ],
 				render: function (ui) {
-					if(ui.rowData[ui.dataIndx]==null)
-						return null;
-					var newDate = new Date();
-					var rowdata = parseInt(ui.rowData[ui.dataIndx]);
-					newDate.setTime( rowdata *1000);
-					return newDate.format('yyyy-MM-dd hh:mm:ss');
+					if(ui.rowData[ui.dataIndx]=='')
+					{
+						return null;					
+					}
+					return ui.rowData[ui.dataIndx];
 				},
 			},
 			{ title: "起用金额", width: 80, dataType: "string",dataIndx: "overprice", align: "center" },
-			{ title: "使用者", editable: false, width: 100, dataType: "float",dataIndx: "user", align: "center"},
+			{ title: "使用者", editable: false, width: 100, dataType: "float",dataIndx: "user", align: "center",
+				render: function (ui) {
+					if(ui.rowData[ui.dataIndx]=='')
+						ui.rowData[ui.dataIndx]=null;
+				},
+			},
 			{ title: "", editable: false, minWidth: 83, align: "center" , sortable: false, render: function (ui) {
 				return "<button type='button' class='delete_btn'>Delete</button>";
 				}
@@ -281,59 +326,8 @@
         var $grid = $("#grid_array").pqGrid(obj);
         var grid = $grid.data("paramquery-pqGrid");		//这里要注意一下官方的demo是错误的
 		//var grid = $grid.data();
-		//console.trace(grid);	
+		//console.trace(grid);		
 		
-		//tobeverify
-        function tobeverify() {    
-			obj.title = "提现审核列表";        
-			obj.colModel = [
-				{ title: "提现人", width: 100, dataType: "string" , align: "center"},
-				{ title: "申请提现时间", width: 160, dataType: "string" , align: "center"},
-				{ title: "成功分享人数", width: 120, dataType: "string", align: "center" },
-				{ title: "申请提现金额（￥）", width: 150, dataType: "float", align: "center"},
-				{ title: "提现状态", width: 100, dataType: "string", align: "center" },	
-				{ title: "", editable: false, minWidth: 83, sortable: false, render: function (ui) {
-					return "<button type='button' class='delete_btn'>Delete</button>";}
-				}
-			];
-			obj.dataModel = { data: data0 };
-			$("#grid_array").pqGrid("destroy");
-			$grid = $("#grid_array").pqGrid(obj);
-        }
-		
-        //verifyed
-        function verifyed() {
-			obj.title = "提现记录列表";
-			obj.colModel = 
-			[
-				{ title: "提现人", width: 100, dataType: "string" , align: "center"},
-				{ title: "申请提现时间", width: 160, dataType: "string" , align: "center"},
-				{ title: "成功提现金额（￥）", width: 150, dataType: "float", align: "center"},
-				{ title: "申请通过时间", width: 160, dataType: "string" , align: "center"},
-				{ title: "审核员", width: 100, dataType: "string", align: "center" }
-			];
-			
-			obj.dataModel = { data: data1 };
-			
-			$("#grid_array").pqGrid("destroy");
-			$grid = $("#grid_array").pqGrid(obj);
-        }
-		
-        //delete Row.
-        function byday() {
-			obj.title = "提现支出列表";
-			obj.colModel = 
-			[
-				{ title: "提现时间", width: 160, dataType: "string" , align: "center"},
-				{ title: "提现笔数", width: 160, dataType: "int" , align: "center"},
-				{ title: "提现金额（￥）", width: 150, dataType: "float", align: "center"},
-			];
-			
-			obj.dataModel = { data: data2 };
-			
-			$("#grid_array").pqGrid("destroy");
-			$grid = $("#grid_array").pqGrid(obj);
-        }
     });     
     </script>
 </block>

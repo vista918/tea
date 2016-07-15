@@ -34,6 +34,26 @@
 	
     <script src="/onethink/Public/static/grid-2.0.4/pqgrid.min.js"></script>
     <script src="/onethink/Application/Home/Public/js/common.js"></script>
+	
+	<style type="text/css">	
+	.gridcss {
+	  position:absolute;
+	  left:0px;
+	  top:40px;
+	}
+	button.delete_btn
+	{
+		margin:-3px 0px;
+	}
+	tr.pq-row-delete
+	{
+		text-decoration:line-through;         
+	}
+	tr.pq-row-delete td
+	{
+		background-color:pink;   
+	}
+	</style>
 
 
 
@@ -139,29 +159,7 @@
 })();
 </script>
 
-    <script type="text/javascript">	  
-	// 对Date的扩展，将 Date 转化为指定格式的String
-	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
-	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
-	// 例子： 
-	// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-	// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-	Date.prototype.format = function (fmt) { //author: meizz 
-		var o = {
-			"M+": this.getMonth() + 1, //月份 
-			"d+": this.getDate(), //日 
-			"h+": this.getHours(), //小时 
-			"m+": this.getMinutes(), //分 
-			"s+": this.getSeconds(), //秒 
-			"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-			"S": this.getMilliseconds() //毫秒 
-		};
-		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-		for (var k in o)
-		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-		return fmt;
-	}
-		
+    <script type="text/javascript">	  		
     $(function () {
 		//document.write(<?php echo ($totalgoods[3]['goodsid']); ?>);
 		var withdrawtobeverify = <?php echo json_encode($withdrawtobeverify)?>;	//待审核
@@ -246,7 +244,7 @@
 			};
 
         var obj = { 
-			width: 1000,
+			width: 1200,
 			height: 600,
 			title: "提现审核列表",
 			resizable:false,

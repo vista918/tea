@@ -12,24 +12,6 @@
 <!--[if lt IE 9]>
 <script src="/onethink/Public/static/bootstrap/js/html5shiv.js"></script>
 <![endif]-->
-	
-	<style type="text/css">	
-	.concss {
-	  position:absolute;
-	  left:495px;
-	  top:80px;
-	  width:700px;
-	  height:300px;
-	}
-	.concss2 {
-	  position:absolute;
-	  left:495px;
-	  top:422px;
-	  width:700px;
-	  height:300px;
-	}
-	</style>
-
 <!--[if lt IE 9]>
 <script type="text/javascript" src="/onethink/Public/static/jquery-1.10.2.min.js"></script>
 <![endif]-->
@@ -51,8 +33,10 @@
     <link rel="stylesheet" href="/onethink/Public/static/grid-2.0.4/themes/office/pqgrid.css" />
 	
     <script src="/onethink/Public/static/grid-2.0.4/pqgrid.min.js"></script>
+    <script src="/onethink/Application/Home/Public/js/common.js"></script>
 
 	<script src="/onethink/Public/static/highcharts.js"></script>  
+
 
 <!--<![endif]-->
 <!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->

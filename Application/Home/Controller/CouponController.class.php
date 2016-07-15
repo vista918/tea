@@ -48,10 +48,10 @@ class CouponController extends HomeController {
             'type' => 0,
             'discount' => 98,
             'disprice' => 20,
-            'starttime' => time(),
-            'deadline' => time(),
+            'starttime' => microtime(),
+            'deadline' => microtime(),
             'status' => 0,
-            'usetime' => time(),
+            'usetime' => microtime(),
             'overprice' => 100,
             'available' => 0,
         );

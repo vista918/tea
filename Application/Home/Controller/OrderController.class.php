@@ -22,7 +22,8 @@ class OrderController extends HomeController {
 		//dump($totalorder);
 		foreach($totalorder as $key => $value)
 		{
-			$ordermoney[$key] = $order->_get_order_money($value['orderid']);
+			$arr = $order->_get_order_money($value['orderid']);
+			$ordermoney[$key] = $arr[1];
 		}
 		$this->assign('totalorder',$totalorder);
 		$this->assign('ordermoney',$ordermoney);
@@ -95,6 +96,80 @@ class OrderController extends HomeController {
 			$order->where($condition)->save($data);
 		}
     }	
+	
+	public function grid()
+	{			
+		$list0  = $_POST['list'];
+		if( isset($list0)  )
+		{
+			$list00 = json_decode($list0, true);
+		}else
+			return ;
+		
+		$addList = $list00["addList"];
+		$updateList = $list00["updateList"];
+		$deleteList = $list00["deleteList"];
+		
+		//dump($addList);
+		//dump($updateList);
+		//dump($deleteList); 
+		
+		$goods = D('Order'); 
+		
+		if( isset($addList) && count($addList) > 0 )            
+		{			
+		
+			foreach ($addList as $key => $record )
+			{
+				//dump($record);
+				$record['orderid'] = null;
+				$record['available'] = 0;		//增加有效字段
+				$goods->add($record);				
+			}    
+		}
+		
+		if( isset($updateList) && count($updateList) > 0 )         
+		{    
+			foreach ($updateList as $record)
+			{
+				$goods->save($record);
+			}    
+			echo json_encode($updateList);
+		}
+		
+		if( isset($deleteList) && count($deleteList) > 0 )     
+		{   
+			foreach ($deleteList as $record)
+			{
+				$condition['orderid'] = $record['orderid'];
+				$this->delete_goods($condition);
+			}    
+			echo json_encode($deleteList);
+		}
+		  
+	}
+		
+	public function get_grid_data()
+	{		
+		$rows = $this->query_order();		
+		$order = D('Order');
+		$coupon = D('Coupon');
+		$buyer = D('Buyer');
+		foreach($rows as $key => &$value)		//采用引用方式
+		{
+			$moneyArray = $order->_get_order_money($value['orderid']);
+			$value['ordermoney'] = $moneyArray[0];
+			$value['finalmoney'] = $moneyArray[1];
+			$condition['couponid'] = $value['couponid'];
+			$couponrecord = $coupon->where($condition)->find();
+			$value['couponidentify'] = $couponrecord['identify'];
+			$condition2['buyerid'] = $value['buyerid'];
+			$buyerrecord = $buyer->where($condition2)->find();
+			$value['buyername'] = $buyerrecord['name'];
+		}
+		$sb = "{\"data\":".json_encode($rows)."}";
+		echo $sb;
+	}
 		
 	/**
 	 * 修改订单属性

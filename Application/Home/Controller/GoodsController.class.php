@@ -117,6 +117,65 @@ class GoodsController extends HomeController {
         );
         var_dump( $goods->save($data));
     }
+	
+	public function grid()
+	{			
+		$list0  = $_POST['list'];
+		if( isset($list0)  )
+		{
+			$list00 = json_decode($list0, true);
+		}else
+			return ;
+		
+		$addList = $list00["addList"];
+		$updateList = $list00["updateList"];
+		$deleteList = $list00["deleteList"];
+		
+		//dump($addList);
+		//dump($updateList);
+		//dump($deleteList); 
+		
+		$goods = D('Goods'); 
+		
+		if( isset($addList) && count($addList) > 0 )            
+		{			
+		
+			foreach ($addList as $key => $record )
+			{
+				//dump($record);
+				$record['goodsid'] = null;
+				$record['available'] = 0;		//增加有效字段
+				$goods->add($record);				
+			}    
+		}
+		
+		if( isset($updateList) && count($updateList) > 0 )         
+		{    
+			foreach ($updateList as $record)
+			{
+				$goods->save($record);
+			}    
+			echo json_encode($updateList);
+		}
+		
+		if( isset($deleteList) && count($deleteList) > 0 )     
+		{   
+			foreach ($deleteList as $record)
+			{
+				$condition['goodsid'] = $record['goodsid'];
+				$this->delete_goods($condition);
+			}    
+			echo json_encode($deleteList);
+		}
+		  
+	}
+		
+	public function get_grid_data()
+	{		
+		$rows = $this->query_goods();
+		$sb = "{\"data\":".json_encode($rows)."}";
+		echo $sb;
+	}
 
 	/**
 	 * 删除商品纪录，在本案例中，仅修改标志位

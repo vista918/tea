@@ -169,6 +169,14 @@ class OrderController extends HomeController {
 		}
 		$sb = "{\"data\":".json_encode($rows)."}";
 		echo $sb;
+	}	
+	
+	public function get_order_goods(/*$orderid*/)
+	{			
+        $ordergoods = D('OrderGoods');
+        $ordergoodsrecord = $ordergoods/*->where("orderid=$orderid")->field("goodsid,goodscount")*/->select();
+		$sb = "{\"data\":".json_encode($ordergoodsrecord)."}";
+		echo $sb;
 	}
 		
 	/**

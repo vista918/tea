@@ -242,6 +242,7 @@
         
         obj.colModel = 
 		[
+			{ title: "", minWidth: 27, width: 27, type: "detail", resizable: false, editable: false /* no need to mention dataIndx */ },
 			{ title: "订单编号",editable: false, width: 100, dataType: "integer", dataIndx:'orderid' , align: "center"},
 			{ title: "订单类别", width: 80, dataType: "string" ,dataIndx:'type', align: "center",
 				render: function (ui) {
@@ -260,10 +261,10 @@
 				},
 			},
 			{ title: "物流费", width: 80, dataType: "float", dataIndx:'deliverymoney', align: "center"},
-			{ title: "", editable: false, minWidth: 83, align: "center" , sortable: false, render: function (ui) {
-				return "<button type='button' class='delete_btn'>Delete</button>";
-				}
-			}
+			//{ title: "", editable: false, minWidth: 83, align: "center" , sortable: false, render: function (ui) {
+			//	return "<button type='button' class='delete_btn'>Delete</button>";
+			//	}
+			//}
 		];
 		
         obj.dataModel = //{ data: data0 };
@@ -274,10 +275,87 @@
 			//url: "/pro/products/get", //for ASP.NET
 			url: "{:U('get_grid_data')}", //for PHP
 			getData: function (response) {
-				return { data: response.data };
+				var data = response.data ;				
+                //expand the first row
+                data[0]['pq_detail'] = { 'show': true };
+                //return { curPage: response.curPage, totalRecords: response.totalRecords, data: data };
+				return { /*curPage: 1, totalRecords: 1,*/ data: data };
 			}
 		};
-        var $grid = $("#grid_array").pqGrid(obj);
+		
+		//details grid
+        var gridDetailModel = {
+            pageModel: { type: "local", rPP: 5, strRpp: "" },
+            dataModel: {
+				dataType: "JSON",
+				location: "remote",
+                method: "GET",
+                sortIndx: "ogid",
+				url: "{:U('get_order_goods')}", //for PHP
+                getData: function (dataJSON) {
+                    return { data: dataJSON.data };
+                }
+            },
+            colModel: [
+                { title: "----", width: 70, dataIndx: "ogid" },
+                { title: "商品编号", width: 70, dataIndx: "goodsid" },
+                { title: "商品数量", width: 90, dataType: "integer", dataIndx: "goodscount" },
+		    ],
+            editable: false,
+            /*groupModel: {
+                dataIndx: ["ogid"],
+                dir: ["up"],
+                title: ["product(s)"],
+                icon: [["ui-icon-triangle-1-se", "ui-icon-triangle-1-e"]]
+            },*/
+            flexHeight: true,
+            width: "100%",
+            numberCell: { show: false },
+            showTop: false,
+            showBottom: false
+        };
+		
+		console.trace(gridDetailModel);
+		
+		obj.detailModel = { init: function (ui) {
+                //debugger;                
+                var rowData = ui.rowData,
+                    orderid = ui.rowData["orderid"],
+                //get markup of the detail template.
+                    $tmpl = $("#tmpl"),
+                    html = $tmpl.html();
+				//	console.trace(html);
+				//	console.trace(rowData);
+                for (var key in rowData) {
+                    var cellData = (rowData[key] == null) ? "" : rowData[key];
+                    html = html.replace("<#=" + key + "#>", cellData);
+                }
+				//	console.trace(html);
+                //create detail place holder
+                var $detail = $("<div></div>");
+                $detail.html(html);
+                $detail.find(".pq-tabs").tabs().on("tabsactivate", function (evt, ui) {
+                    if (ui.newPanel.is("#tabs-2")) {
+                        $grid.pqGrid("refresh");
+                    }
+                });
+
+                //make a deep copy of gridDetailModel
+                var objCopy = $.extend(true, {}, gridDetailModel);
+
+                //objCopy.dataModel.url = "/pro/orderdetails/get?orderId=" + orderid;
+                //objCopy.dataModel.url = "/pro/orderdetails.php?orderId=" + orderID;//for PHP
+				//objCopy.dataModel.url = "{:U('get_order_goods')}";//+"?orderid="+orderid;
+
+                //append pqGrid in the 2nd tab.
+                var $grid = $("<div></div>").appendTo($("#tabs-2", $detail)).pqGrid(objCopy);
+
+                return $detail;
+            }
+		};	
+		
+		
+        var $grid = $("div#grid_md").pqGrid(obj);
         var grid = $grid.data("paramquery-pqGrid");		//这里要注意一下官方的demo是错误的
 		//var grid = $grid.data();
 		//console.trace(grid);		
@@ -291,6 +369,22 @@
 	  position:absolute;
 	  left:0px;
 	  top:40px;
+	}	
+	.pq-grid div.pq-tabs
+	{
+		width:650px;    
+	}    
+	.pq-grid div.pq-tabs *
+	{
+		white-space:normal;    
+	}
+	.pq-grid p
+	{
+		margin:10px;
+	}
+	.pq-grid .pq-tabs b
+	{
+		font-weight:bold;
 	}
 	</style>
 </block>
@@ -306,5 +400,30 @@
 </block>
 
 <block name="body">   	
-	<div id="grid_array" class = "gridcss" ></div>   
+	<div id="grid_md" style="margin:5px auto;"></div>
+
+	<!--script tag used to define detail template-->
+	<script type="text/pq-template" id="tmpl">
+		<div class="pq-tabs" style="width:700px;">
+			<ul>
+				<li><a href="#tabs-1">Address</a></li>
+				<li><a href="#tabs-2">Products</a></li>            
+				<li><a href="#tabs-3">Dates</a></li>
+			</ul>
+			<div id="tabs-1">
+				<p><b>Shipping Address:</b> <#=ShipAddress#></p>
+				<p><b>Shipping City:</b> <#=ShipCity#></p>
+				<p><b>Shipping Region:</b> <#=ShipRegion#></p>
+				<p><b>Shipping Postal Code:</b> <#=ShipPostalCode#></p>
+			</div>
+			<div id="tabs-2">
+			</div>
+			<div id="tabs-3">
+				<p><b>Order Date:</b> <#=OrderDate#></p>
+				<p><b>Required Date:</b> <#=RequiredDate#></p>
+				<p><b>Shipped Date:</b> <#=ShippedDate#></p>
+			</div>
+		</div>
+	</script>
+	<!-- <div id="grid_array" class = "gridcss" ></div>    -->
 </block>

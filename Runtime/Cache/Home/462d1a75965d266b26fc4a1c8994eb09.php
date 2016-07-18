@@ -163,10 +163,9 @@
     $(function () {
 		var totaltopic = <?php echo json_encode($totaltopic)?>;	//待审核
 		var countoftotaltopic = totaltopic.length;
-		var data0 = new Array(countoftotaltopic);
+		var data0 = new Array(countoftotaltopic);		
 		
-		
-		for(i = 0; i < countoftotaltopic; ++i)
+		/*for(i = 0; i < countoftotaltopic; ++i)
 		{
 			var newDate = new Date();	
 			newDate.setTime(totaltopic[i].topictime*1000);	
@@ -178,7 +177,7 @@
 			data0[i][3] = newDate.format('yyyy-MM-dd hh:mm:ss');
 			data0[i][4] = totaltopic[i].isshow;
 			data0[i][5] = "";
-		}			
+		}		*/	
 			
         function getRowIndx() {
             var arr = $grid.pqGrid("selection", { type: 'row', method: 'getSelection' });
@@ -190,13 +189,174 @@
                 return null;
             }
         }
+		
+		function getRowIndx() {
+            var arr = $grid.pqGrid("selection", { type: 'row', method: 'getSelection' });
+            if (arr && arr.length > 0) {
+                return arr[0].rowIndx;                                
+            }
+            else {
+                alert("Select a row.");
+                return null;
+            }
+        }
 
+		var ajaxObj = {
+            dataType: "json",
+            url: "<?php echo U('grid');?>", //for PHP
+            //contentType: "application/json; charset=utf-8",//for ASP.NET
+            type: "POST",
+            async: true,
+            beforeSend: function (jqXHR, settings) {                
+                $grid.pqGrid("showLoading");
+            }
+        };
+
+        //called when accept changes button is clicked.
+        function acceptChanges() {
+            //attempt to save editing cell.
+            //debugger;
+            if (grid.saveEditCell() === false) {
+                return false;
+            }
+
+            var isDirty = grid.isDirty();
+            if (isDirty) {
+                //validate the new added rows.                
+                var addList = grid.getChanges().addList;
+                for (var i = 0; i < addList.length; i++) {
+                    var rowData = addList[i];
+                    var isValid = grid.isValid({ "rowData": rowData }).valid;
+                    if (!isValid) {
+                        return;
+                    }
+                }
+                var changes = grid.getChanges({ format: "byVal" });
+				//console.trace(changes);
+
+                //post changes to server 
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    async: true,
+                    beforeSend: function (jqXHR, settings) {
+                        grid.showLoading();
+                    },
+                    //url: "/pro/products/batch", //for ASP.NET, java                                                
+					url: "<?php echo U('grid');?>",
+                    data: { list: JSON.stringify(changes) },
+                    success: function (changes) {
+                        //debugger;
+                        grid.commit({ type: 'add', rows: changes.addList });
+                        grid.commit({ type: 'update', rows: changes.updateList });
+                        grid.commit({ type: 'delete', rows: changes.deleteList });
+
+                    },
+                    complete: function () {
+                        grid.hideLoading();
+                    }
+                });
+            }
+        }
+		
+		var dateEditor = function (ui) {
+            var $cell = ui.$cell,
+                rowData = ui.rowData,
+                dataIndx = ui.dataIndx,
+                cls = ui.cls,
+                dc = $.trim(rowData[dataIndx]);
+            $cell.css('padding', '0');
+
+            var $inp = $("<input type='text' id = 'datapickerinput' name='" + dataIndx + "' class='" + cls + " pq-date-editor' />")
+            .appendTo($cell)
+            .val(dc).datepicker({
+				regional: "zh" ,
+                changeMonth: true,
+                changeYear: true,
+				showButtonPanel:true,//是否显示按钮面板 
+				//yearSuffix: '年', //年的后缀 
+				dateFormat: 'yy-mm-dd',//日期格式
+				showMonthAfterYear:true,//是否把月放在年的后面 
+				//defaultDate: dc,//默认日期
+				minDate:'-1Y', //最小日期 
+				maxDate:"+1Y +0M +0D",//最大日期 
+                onClose: function () {
+                    $inp.focus();
+                }
+            });
+            //.focus();
+		}
+		
         var obj = { 
 			width: 1200,
 			height: 600,
 			title: "评论列表",
 			resizable:false,
-			draggable:true ,
+			draggable:false ,
+            scrollModel: {
+                autoFit: true
+            },
+            selectionModel: {
+                type: 'cell'
+            },
+            track: true, //to turn on the track changes.
+            hoverMode: 'cell',
+            editModel: {
+				clicksToEdit: 1, 
+                saveKey: $.ui.keyCode.ENTER,
+                select: false,
+                keyUpDown: false,
+                cellBorderWidth: 0  
+            },
+            editor: { type: "textbox" },
+            pageModel: { type: "local", rPP: 10, rPPOptions: [10, 20, 50, 100] },
+			toolbar:{
+				items:[
+				{type : "button",label: '新评论', /*style: 'margin:2px 0px;',*/ listeners: [
+                        { "click": function (evt, ui) {
+                            //append empty row at the end.                            
+                            var rowData = { isshow : 1 }; //empty row
+                            var rowIndx = $grid.pqGrid("addRow", { rowData: rowData });
+                            $grid.pqGrid("goToPage", { rowIndx: rowIndx });
+                            $grid.pqGrid("editCell", { rowIndx: rowIndx, dataIndx: "goodsname" });
+                        }
+                        }
+                    ], icon: 'ui-icon-plus', cls: 'ui-state-default'},
+                    { type: 'button', icon: 'ui-icon-disk', label: '提交修改', style: 'margin:0px 5px;', listeners: [
+                        { "click": function (evt, ui) {
+                            acceptChanges();
+                        }
+                        }
+                    ]
+                    },
+                    { type: 'button', icon: 'ui-icon-cancel', label: '取消修改', listeners: [
+                        { "click": function (evt, ui) {
+                            $grid.pqGrid("rollback");
+                        }
+                        }
+                    ]
+                    },
+                    { type: 'separator' },
+                    { type: 'button', icon: 'ui-icon-cart', label: '获得修改', style: 'margin:0px 5px;', listeners: [
+                        { "click": function (evt, ui) {
+                            var changes = $grid.pqGrid("getChanges");
+                            try {
+                                console.log(changes);
+                            }
+                            catch (ex) { }
+                            alert("Please see the log of changes in your browser console.");
+                        }
+                        }
+                    ]
+                    }
+				]
+			},
+            //save the cell when cell loses focus.
+            quitEditMode: function (evt, ui) {                
+                if (evt.keyCode != $.ui.keyCode.ESCAPE && evt.keyCode != $.ui.keyCode.TAB) {
+                    $grid.pqGrid("saveEditCell");
+                }
+            },
 			refresh: function () {
                 $("#grid_array").find("button.delete_btn").button({ icons: { primary: 'ui-icon-scissors'} })
                 .unbind("click")
@@ -219,22 +379,53 @@
                     }
                 });
             },
+            cellBeforeSave: function (evt, ui) {	
+				/*var validObj = $grid.pqGrid("isValid",{rowIndx:ui.rowIndx,dataIndx:ui.dataIndx,value:ui.newVal});				
+                if (!validObj.valid) {
+                    evt.preventDefault();
+                    return false;
+                }*/			
+				//console.trace(ui.newVal);
+				var isValid = grid.isValid(ui);	
+				//console.trace(isValid);
+                if (!isValid.valid) {
+					//console.trace(grid);
+					$grid.find(".pq-editor-focus").css({ "border-color": "red" });
+                    //evt.preventDefault();
+                    return false;
+                }				
+            }
 		};
+        
+		
         obj.colModel = 
 		[
-			{ title: "商品信息", width: 100, dataType: "string" , align: "center"},
-			{ title: "客户", width: 100, dataType: "string" , align: "center"},
-			{ title: "评论内容", width: 200, dataType: "string", align: "center" },
-			{ title: "评价时间", width: 150, dataType: "string", align: "center"},
-			{ title: "显示", width: 60, dataType: "string", align: "center" },
-			{ title: "回复内容", width: 160, dataType: "string", align: "center"},
+			{ title: "商品信息", width: 100, dataType: "string" , dataIndx:'goodsname',align: "center"},
+			{ title: "客户", width: 100, dataType: "string" ,dataIndx:'buyername' ,align: "center"},
+			{ title: "评论内容", width: 200, dataType: "string",dataIndx:'topiccontent',editable:false, align: "center" },
+			{ title: "评价时间", width: 150, dataType: "string",dataIndx:'topictime',editable:false,align: "center"},
+			{ title: "显示", width: 60, dataType: "string", dataIndx:'isshow',align: "center" },
+			{ title: "回复内容", width: 160, dataType: "string",dataIndx:'reply', align: "center"},
 			{ title: "操作", editable: false, minWidth: 83, sortable: false, render: function (ui) {
 				return "<button type='button' class='delete_btn'>Delete</button>";}
 			}
 		];
-        obj.dataModel = { data: data0 };
-        $grid = $("#grid_array").pqGrid(obj);
-        var grid = $grid.data("paramqueryPqGrid");
+		
+        obj.dataModel = //{ data: data0 };
+		{                
+			dataType: "JSON",
+			location: "remote",
+			recIndx: "topicid",
+			//url: "/pro/products/get", //for ASP.NET
+			url: "<?php echo U('get_grid_data');?>", //for PHP
+			getData: function (response) {
+				return { data: response.data };
+			}
+		};
+        var $grid = $("#grid_array").pqGrid(obj);
+        var grid = $grid.data("paramquery-pqGrid");		//这里要注意一下官方的demo是错误的
+		//var grid = $grid.data();
+		//console.trace(grid);	
     });    
     </script>
  <!-- 用于加载js代码 -->

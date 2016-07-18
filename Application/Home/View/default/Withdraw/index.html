@@ -68,7 +68,7 @@
 				items:[
 				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-highlight'},
 				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-default'},
-				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}
+				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}                
 				]
 			};
 		
@@ -93,14 +93,24 @@
 			height: 600,
 			title: "提现审核列表",
 			resizable:false,
-			draggable:true ,
-			/*toolbar:{
-				items:[
-				{type : "button",label: '待审核', listeners: [{ click: tobeverify }], icon: 'ui-icon-flag', cls: 'ui-state-highlight'},
-				{type : "button",label: '提现记录', style: 'margin:0px 5px;', listeners: [{ click: verifyed}], icon: 'ui-icon-flag', cls: 'ui-state-default'},
-				{type : "button",label: '提现支出', style: 'margin:0px 5px;', listeners: [{ click: byday}], icon: 'ui-icon-flag', cls: 'ui-state-default'}
-				]
-			},*/
+			draggable:false ,
+            scrollModel: {
+                autoFit: true
+            },
+            selectionModel: {
+                type: 'cell'
+            },
+            track: true, //to turn on the track changes.
+            hoverMode: 'cell',
+            editModel: {
+				clicksToEdit: 1, 
+                saveKey: $.ui.keyCode.ENTER,
+                select: false,
+                keyUpDown: false,
+                cellBorderWidth: 0  
+            },
+            editor: { type: "textbox" },
+            pageModel: { type: "local", rPP: 10, rPPOptions: [10, 20, 50, 100] },
 			refresh: function () {
                 $("#grid_array").find("button.delete_btn").button({ icons: { primary: 'ui-icon-scissors'} })
                 .unbind("click")
@@ -126,18 +136,18 @@
 		};
         obj.colModel = 
 		[
-			{ title: "提现人", width: 100, dataType: "string" , align: "center"},
-			{ title: "申请提现时间", width: 160, dataType: "string" , align: "center"},
-			{ title: "成功分享人数", width: 120, dataType: "string", align: "center" },
-			{ title: "申请提现金额（￥）", width: 150, dataType: "float", align: "center"},
+			{ title: "提现人", width: 100, dataType: "string" , align: "center", editable: false},
+			{ title: "申请提现时间", width: 160, dataType: "string" , align: "center", editable: false},
+			{ title: "成功分享人数", width: 120, dataType: "string", align: "center" , editable: false},
+			{ title: "申请提现金额（￥）", width: 150, dataType: "float", align: "center", editable: false},
 			{ title: "提现状态", width: 100, dataType: "string", align: "center" },
 			//{ title: "操作", editable: false, minWidth: 83, sortable: false, render: function (ui) {
 			//	return "<label bgcolor='#00ff00'><a href='#'>通过</a></label> <label bgcolor='#00ff00'><a href='#'>不通过</a></label>";
 			//	}
 			//}			
-			{ title: "", editable: false, minWidth: 83, sortable: false, render: function (ui) {
-				return "<button type='button' class='delete_btn'>Delete</button>";}
-			}
+			//{ title: "", editable: false, minWidth: 83, sortable: false, render: function (ui) {
+			//	return "<button type='button' class='delete_btn'>Delete</button>";}
+			//}
 		];
         obj.dataModel = { data: data0 };
 		obj.toolbar = toolbar0;
@@ -149,14 +159,14 @@
         function tobeverify() {    
 			obj.title = "提现审核列表";        
 			obj.colModel = [
-				{ title: "提现人", width: 100, dataType: "string" , align: "center"},
-				{ title: "申请提现时间", width: 160, dataType: "string" , align: "center"},
-				{ title: "成功分享人数", width: 120, dataType: "string", align: "center" },
-				{ title: "申请提现金额（￥）", width: 150, dataType: "float", align: "center"},
+				{ title: "提现人", width: 100, dataType: "string" , align: "center", editable: false},
+				{ title: "申请提现时间", width: 160, dataType: "string" , align: "center", editable: false},
+				{ title: "成功分享人数", width: 120, dataType: "string", align: "center" , editable: false},
+				{ title: "申请提现金额（￥）", width: 150, dataType: "float", align: "center", editable: false},
 				{ title: "提现状态", width: 100, dataType: "string", align: "center" },	
-				{ title: "", editable: false, minWidth: 83, sortable: false, render: function (ui) {
+				/*{ title: "", editable: false, minWidth: 83, sortable: false, render: function (ui) {
 					return "<button type='button' class='delete_btn'>Delete</button>";}
-				}
+				}*/
 			];
 			obj.dataModel = { data: data0 };
 			obj.toolbar = toolbar0;
@@ -169,11 +179,11 @@
 			obj.title = "提现记录列表";
 			obj.colModel = 
 			[
-				{ title: "提现人", width: 100, dataType: "string" , align: "center"},
-				{ title: "申请提现时间", width: 160, dataType: "string" , align: "center"},
-				{ title: "成功提现金额（￥）", width: 150, dataType: "float", align: "center"},
-				{ title: "申请通过时间", width: 160, dataType: "string" , align: "center"},
-				{ title: "审核员", width: 100, dataType: "string", align: "center" }
+				{ title: "提现人", width: 100, dataType: "string" , align: "center", editable: false},
+				{ title: "申请提现时间", width: 160, dataType: "string" , align: "center", editable: false},
+				{ title: "成功提现金额（￥）", width: 150, dataType: "float", align: "center", editable: false},
+				{ title: "申请通过时间", width: 160, dataType: "string" , align: "center", editable: false},
+				{ title: "审核员", width: 100, dataType: "string", align: "center" , editable: false}
 			];
 			
 			obj.dataModel = { data: data1 };
@@ -188,9 +198,9 @@
 			obj.title = "提现支出列表";
 			obj.colModel = 
 			[
-				{ title: "提现时间", width: 160, dataType: "string" , align: "center"},
-				{ title: "提现笔数", width: 160, dataType: "int" , align: "center"},
-				{ title: "提现金额（￥）", width: 150, dataType: "float", align: "center"},
+				{ title: "提现时间", width: 160, dataType: "string" , align: "center", editable: false},
+				{ title: "提现笔数", width: 160, dataType: "int" , align: "center", editable: false},
+				{ title: "提现金额（￥）", width: 150, dataType: "float", align: "center", editable: false},
 			];
 			
 			obj.dataModel = { data: data2 };

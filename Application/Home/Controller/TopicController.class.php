@@ -44,8 +44,8 @@ class TopicController extends HomeController {
             //'topicid' => ,
 			'goodsid' => 1,
             'buyerid' => 10002,
-            'topic_content' => '茶叶不错哟，下次还会再来买',
-            'topic_time' => time(),
+            'topiccontent' => '茶叶不错哟，下次还会再来买',
+            'topictime' => time(),
             'is_show' => 1
         );
         var_dump( $topic->_new_topic_($data));
@@ -95,6 +95,75 @@ class TopicController extends HomeController {
 				
 		return $queryresult;
     }	
+	
+	public function grid()
+	{			
+		$list0  = $_POST['list'];
+		if( isset($list0)  )
+		{
+			$list00 = json_decode($list0, true);
+		}else
+			return ;
+		
+		$addList = $list00["addList"];
+		$updateList = $list00["updateList"];
+		$deleteList = $list00["deleteList"];
+		
+		//dump($addList);
+		//dump($updateList);
+		//dump($deleteList); 
+		
+		$topic = D('Topic'); 
+		
+		if( isset($addList) && count($addList) > 0 )            
+		{			
+			foreach ($addList as $key => $record )
+			{
+				//dump($record);
+				$record['topicid'] = null;
+				$record['available'] = 0;		//增加有效字段
+				$topic->add($record);				
+			}    
+		}
+		
+		if( isset($updateList) && count($updateList) > 0 )         
+		{    
+			foreach ($updateList as $record)
+			{
+				$topic->save($record);
+			}    
+			echo json_encode($updateList);
+		}
+		
+		if( isset($deleteList) && count($deleteList) > 0 )     
+		{   
+			foreach ($deleteList as $record)
+			{
+				$condition['topicid'] = $record['topicid'];
+				$this->delete_buyer($condition);
+			}    
+			echo json_encode($deleteList);
+		}
+	}
+		
+	public function get_grid_data()
+	{		
+		$rows = $this->query_topic();		
+		$goods = D('Goods');
+		$buyer = D('Buyer');
+		$topic = D('Topic');
+		foreach($rows as $key => $value)		//采用引用方式
+		{
+			$condition['buyerid'] = $value['buyerid'];
+			$condition0['goodsid'] = $value['goodsid'];
+			$goodsrecord = $goods->where($condition)->find();
+			$record = $buyer->where($condition)->find();
+			$rows[$key]['goodsname'] = $goodsrecord['name'];
+			$rows[$key]['buyername'] = $record['name'];
+		}
+		$sb = "{\"data\":".json_encode($rows)."}";
+		echo $sb;
+	}
 	
 	/**
 	 * 查询符合条件的评论记录
